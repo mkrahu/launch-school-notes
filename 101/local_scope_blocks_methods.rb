@@ -20,11 +20,13 @@
 # 8. If a block takes a parameter, variable shadowing prevents access to variables of the same name outside the block
 # 
 # METHODS
-# 1. Methods create their own scope that's entirely outside the execution flow of the program
-# 2. Methods cannot directly access variables initialised outside of the method
-# 3. The execution flow cannot access variables initialised inside the method
-# 4. Methods can access variables that are explicitly passed into the method
-# 5. When blocks are used inside a method, the same block scope rules apply
+# 1. A Method is the Ruby name for a programming procedure. Before using a method it must be defined
+# 2. Methods create their own scope that's entirely outside the execution flow of the program
+# 3. Methods cannot directly access variables initialised outside of the method
+# 4. The execution flow cannot access variables initialised inside the method
+# 5. Methods can access data that are explicitly passed into the method using arguments/ parameters
+# 6. Methods can take default parameters
+# 7. When blocks are used inside a method, the same block scope rules apply
 
 # Example 1: Blocks are defined by do/ end or {} but only if they follow a method invocation
 
@@ -128,3 +130,20 @@ def some_method
   end
   # (b) cannot be accessed here
 end
+
+# Example 9: Method parameters and arguments
+
+def some_method(parameter_1, parameter_2) # These are the parameters of the method definition
+  puts "#{paremeter_1} #{parameter_2}"
+end
+
+some_method('Argument 1', 'Argument 2') # These are the arguments of the method invocation
+
+# Example 10: If there is a default parameter set in the method defintition and no argument is passed for that parameter the default is used
+
+def greeting(a='Hello')
+  puts a
+end
+
+greeting # this would output the string 'Hello'
+greeting('Goodbye') # This would output the string 'Goodbye'
