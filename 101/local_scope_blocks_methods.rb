@@ -29,13 +29,13 @@
 # Example 1: Blocks are defined by do/ end or {} but only if they follow a method invocation
 
 loop do # this follows a method invocation and so is a block therefore (a) cannot be accessed outside of the block
-	a = 5
+  a = 5
 end
 
 arr = [1, 2, 3]
 
 for i in arr do # although this used do/ end it does not follow a method invocation and so is not a block
-	b = 5					# it is just a part of the execution flow of the program therefore b can be accessed outside of it
+  b = 5					# it is just a part of the execution flow of the program therefore b can be accessed outside of it
 end
 
 # Example 2: Nested Block
@@ -46,14 +46,14 @@ end
 a = 1 # first level
 
 loop do # second level
-	b = 2
-	
-	loop do # third level
-		c = 3
-		break
-	end
-	
-	break
+  b = 2
+  
+  loop do # third level
+    c = 3
+    break
+  end
+  
+  break
 end
 
 # Example 3: variable reassignment in a block
@@ -61,8 +61,8 @@ end
 a = 1
 
 loop do
-	a = 2
-	break
+  a = 2
+  break
 end
 
 puts a # this would output 2 since the variable (a) has been reassigned to the value 2 within the block
@@ -71,11 +71,11 @@ puts a # this would output 2 since the variable (a) has been reassigned to the v
 # The block cannot access each others' variables
 
 loop do
-	a = 2
+  a = 2
 end
 
 loop do
-	a = 4 # the first (a) is not accessible here
+  a = 4 # the first (a) is not accessible here
 end
 
 # Neither (a) is accessible here
@@ -86,7 +86,7 @@ end
 a = 5
 
 [1, 2, 3].each do |a|
-	puts a
+  puts a
 end
 
 # Example 6: Method
@@ -94,7 +94,7 @@ end
 # Also the method cannot (directly) access variables initialised in the execution flow
 
 def some_method # (a) cannot be accessed here
-	b = 1	
+  b = 1	
 end
 
 # (b) cannot be accessed here
@@ -103,7 +103,7 @@ a = 2
 # Example 7: Here the method can access (a) because it is passed into the method
 
 def some_method(a)
-	puts a
+  puts a
 end
 
 a = 5
@@ -113,7 +113,7 @@ some_method(a)
 # This would give the same result:
 
 def some_method(b)
-	puts b
+  puts b
 end
 
 a = 5
@@ -122,9 +122,9 @@ some_method(a)
 # Example 8: Here variables initialed inside the blcok cannot be accessed outside of it
 
 def some_method
-	a = 1
-	loop do # (a) can be acessed here
-		b = 2 
-	end
-	# (b) cannot be accessed here
+  a = 1
+  loop do # (a) can be acessed here
+    b = 2 
+  end
+  # (b) cannot be accessed here
 end
