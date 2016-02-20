@@ -125,7 +125,3 @@ my_outer_hash = {
 # Example 15: reerencing an object from a nested collection
 
 my_outer_hash['inner hash 1'][2] # => 'b'
-
-
-
-
