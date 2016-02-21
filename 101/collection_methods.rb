@@ -8,7 +8,8 @@
 # d) inject can accumulate total or concatenate values together
 # 3. sort and sort_by can be used to sort colections using logic in a block
 # 4. any? can be used to see if  any objects in the collection meet the criteria 
-# 5. all? can be used to see ifall objects in the collection meet the criteria 
+# 5. all? can be used to see ifall objects in the collection meet the criteria
+# 6. we can use collection methods on strings if we first convert them to an array
 
 # ITERATION
 
@@ -106,3 +107,9 @@ my_array.any? { |num| num > 5 } # => false
 my_array.all? { |num| num > 3 } # => false
 
 my_array.all? { |num| num > 0 } # => true
+
+# Example 17: Using sort_by on a string
+
+my_string = "This is a string containing different length words"
+
+my_string.split(" ").sort_by { |word| word.length }.join(" ") # => "a is This words string length different containing" 
