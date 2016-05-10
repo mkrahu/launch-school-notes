@@ -1,7 +1,7 @@
 # Classes and Objects
 
 Classes and Objects are used as *containers for data* that can be changed and manipulated without affecting
-the entire program. They allow programs to become teh interaction of many small parts rather than one big blob
+the entire program. They allow programs to become the interaction of many small parts rather than one big blob
 of dependency.
 
 Using Objects and Classes allows you to achieve certain things which form part of the OOP coding paradigm:

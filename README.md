@@ -10,7 +10,15 @@ Notes from the  various courses undertaken as part of the [Launch School](https:
 ### 120
 
 * [Classes and Objects](120/classes_and_objects.md)
-* [Module](120/module.md)
 * [Instance Variables and Methods](120/instance_variables_methods.md)
+* [Class Variables and Methods](120/class_variables_methods.md)
+* [Getter and Setter](120/getter_and_setter.md)
+* [Module](120/module.md)
+* [Inheritance](120/inheritance.md)
+* [Method Lookup Path](120/method_lookup_path.md)
+* [Self](120/self.md)
+* [Fake Operators](120/fake_operator.md)
+* [Truthiness](120/truthiness.md)
+* [Collaborator Objects](120/collaborator_objects.md)
 
 ### 130
