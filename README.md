@@ -16,6 +16,7 @@ Notes from the  various courses undertaken as part of the [Launch School](https:
 * [Module](120/module.md)
 * [Inheritance](120/inheritance.md)
 * [Method Lookup Path](120/method_lookup_path.md)
+* [Public, Private, Protected'(120/public_private_protected.md)]
 * [Self](120/self.md)
 * [Fake Operators](120/fake_operator.md)
 * [Truthiness](120/truthiness.md)

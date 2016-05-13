@@ -49,7 +49,7 @@ value of the `@name` instance variable by calling the `name` getter method on th
 ## Setter Method
 
 What if we want to change the value of the `@name` instance variable to something
-other than "Kate"? For this we can use a setter methos
+other than "Kate"? For this we can use a setter method
 
 #### Example 3:
 ```ruby
@@ -70,11 +70,11 @@ end
 kate = Human.new('Kate')
 
 
-kate.set_name = "Bob" # => sets the value of @name to 'Bob' and returns it
+kate.name = "Bob" # => sets the value of @name to 'Bob' and returns it
 ```
 
-In this exampe we call the `set_name` method on our `kate` object passing in
-the argument "Bob". The `set_name` method sets the value of the `@name` variable to
+In this exampe we call the `name=` method on our `kate` object passing in
+the argument "Bob". The `name=` method sets the value of the `@name` variable to
 this.
 
 It is usual to name the getter and setter methods to the same name as the instance 
