@@ -74,9 +74,101 @@ In this example the `==` method is over-ridden to simply compare the value of th
 
 Note: if you define a `==` method you automatically get a `!=` method.
 
-Other comparison methods sunch as `<`, `>` and `===` can also be over-ridden.
-
 
 ### Comparison Methods
 
+Other comparison methods such as `<`  `>` can also be over-ridden/ defined in custom classes.
 
+#### Example 3:
+```ruby
+class Person
+  attr_accessor :name, :age
+
+  def initialize(name, age)
+    @name = name
+    @age = age
+  end
+end
+
+bob = Person.new("Bob", 49)
+kim = Person.new("Kim", 33)
+```
+
+In this example there is a custom `Person` class with instance variables for `name` and `age` and two instances of the class have been created `bob` and `kim`. If we attempt a comparison of them however with the `>` comparison operator we get a `NoMethodError` because there isn't a `>` method for `Person` class.
+```ruby
+puts "bob is older than kim" if bob > kim # => NoMethodError
+```
+
+The method can be defined comparing the values of the `age` variable from both objects (which is a Fixnum and so uses the `>` method of `Fixnum` class):
+```ruby
+class Person
+  # ... rest of code omitted for brevity
+
+  def >(other_person)
+    age > other_person.age
+  end
+end
+```
+
+The method can then be called using either the standard method call syntax or the more natural 'operator' syntax:
+```ruby
+puts "bob is older" if bob.>(kim)           # => "bob is older"
+puts "bob is older" if bob > kim            # => "bob is older"
+```
+
+Note: defining a `>` method does not automatically provide a `<` method - this would have to be defined separately.
+
+
+### The `<<` and  `>>` shift methods
+
+Just like any other fake operators `<<` and `>>` can be over-ridden to do anything - they are just regular instance methods. When over-riding 'operator-like' methods it is always a good idea to define functionality that makes sense int eh context of the operator-like syntax. For example using `<<` fits well when working with a class that represents a collection.
+
+
+### The Plus Method
+
+`1 + 1` may seem like an operation but in Ruby this is actually a method call.
+```ruby
+1 + 1 # => 2
+1.+(1) # => 2
+```
+
+Here when `+` is being called on an integer, this is an object of the `Fixnum` class and so the `+` method for that class is used. 
+
+`+` does different things depending on its method implementation within the class for the object upon which it is being called.
+
+* `Fixnum#+`: increments the value by value of the argument, returning a new integer
+* `String#+`: concatenates with argument, returning a new string
+* `Array#+`: concatenates with argument, returning a new array
+* `Date#+`: increments the date in days by value of the argument, returning a new date
+
+Generally though the `+` should be either incrementing or concatenating with the argument.
+
+
+### Element setter and getter methods
+
+Out of all the 'operator-like' methods `[]` and `[]=` are perhaps the most extreme in the way that they alter teh syntax from the standard method syntax.
+
+#### Example 4:
+```ruby
+my_array = %w(first second third fourth)    # ["first", "second", "third", "fourth"]
+
+# element reference
+my_array[2]                                 # => "third"
+my_array.[](2)                              # => "third"
+```
+
+In this example both method calls are identical but look dramatically different. This is just Ruby providing nice, readable syntax.
+
+The difference in syntax for the `[]=` method is even more dramatic.
+
+#### Example 5:
+```ruby
+# element assignment
+my_array[4] = "fifth"
+puts my_array.inspect                            # => ["first", "second", "third", "fourth", "fifth"]
+
+my_array.[]=(5, "sixth")
+puts my_array.inspect                            # => ["first", "second", "third", "fourth", "fifth", "sixth"]
+```
+
+When using custom definitions for element getter and setter methods in a class, this should be done with a class that represents a collection.
