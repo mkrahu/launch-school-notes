@@ -6,6 +6,17 @@ Notes from the  various courses undertaken as part of the [Launch School](https:
 
 ### 101
 
+* [Local Variable Scope](101/local_scope_blocks_methods.md)
+* [Call by Sharing](101/call_by_sharing.md)
+* [Working with Collections](101/collections.md)
+* [Collection Methods](101/collection_methods.md)
+  * [String Methods](101/string_methods.md)
+  * [Array Methods](101/array_methods.md)
+  * [Hash Methods](101/hash_methods.md)
+* [Variables as Pointers](101/ariables_as_pointers.md)
+* [puts vs return](101/puts_vs_return.md)
+* [false vs nil](101/false_vs_nil.md)
+* [Implicit return value of methods and blocks](101/implicit_return_value.md)
 
 ### 120
 
