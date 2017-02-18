@@ -21,7 +21,7 @@ Here is an erb tag inside an HTML tag. When the template is *rendered* the value
   * If you want to display a value use a special start tag `<%=`
   * To use a template in a route in Sinatra you add it to the route
     * The name of the templete is passed to `erb` as a symbol
-    * Sinatra will look for templates in a directory called `templates` in the root of the app
+    * Sinatra will look for templates in a directory called `views` in the root of the app
 
 Example:
 ```ruby
@@ -44,7 +44,7 @@ end
 Example:
 
 ```ruby
-`require "tilt/erubis"` conf
+require "tilt/erubis"
 ```
 
 https://launchschool.com/posts/02ef60e4

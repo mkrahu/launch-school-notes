@@ -2,7 +2,13 @@
 
 Notes for [Launch School](https://launchschool.com/) Course 180
 
+
+--------
+
+## Topics
+
   * [SQL Overview](sql_overview.md)
+    * Introduction
     * Language Basics
     * Queries
     * Joins
@@ -35,6 +41,7 @@ Notes for [Launch School](https://launchschool.com/) Course 180
       * Inserting Data
       * Updating Data
       * Deleting Data
+      * Loading database dumps
     * Data Control
       * Client Authentication
       * Database Roles
@@ -60,3 +67,10 @@ Notes for [Launch School](https://launchschool.com/) Course 180
     * The sequel gem
       * Useful sequel methods
     * Sinatra and sequel web app
+
+---------
+
+## Resources
+
+  * PostgeSQL Documentation
+  * Sequel Documentation
