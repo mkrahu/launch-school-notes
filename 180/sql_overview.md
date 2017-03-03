@@ -106,7 +106,7 @@ GROUP BY authors.author;
   * Subqueries are regular SQL queries embeded inside larger queries
   * There are three different types of sub-query, based on what they return:
     * Two-dimensional Table
-    * On Dimensional Array
+    * One Dimensional Array
     * Single Values
 
 ### Two-dimensional Table
@@ -128,7 +128,7 @@ WHERE author = 'William Gibson';
 
 Note: You could of course do this without the sub-query by adding a `HAVING` clause to the original query. `HAVING` performs a similar role to `WHERE` but for queries where aggregation has been used.
 
-### On Dimensional Array
+### One Dimensional Array
 
   * These are queries that return multiple rows of a single column
   * As a subquery they can be used in the same way as a two-dimensional table (i.e. queried further) or they can be used as an array of values which can then be used in a further query
@@ -250,7 +250,139 @@ VALUES
 <a name="Normalisation"></a>
 ## Database design and Normalisation
 
-[From the book - DB Design and Normalisation]
+  * Database normalisation is a process of organising data effectively in tables. It is a systematic approach of decomposing tables to eliminate data redundancy and undesirable characteristics such as Insertion, Update and Deletion anomalies
+  * Normalisation is carried out by adding additional tables to a database and creating appropriate relationships between these tables
+
+### Normal Forms
+
+  * The database community has developed a series of guidelines for ensuring that databases are normalised; these are referred to as 'normal forms'
+  * Currently these run from First Normal Form through to Fifth Normal Form
+  * Abbreviatons such as 1NF, 2NF, etc are generally used to denote normal form
+
+#### Denormalised
+
+  * A *denormalised* database table is one that does not comply with even the 1NF rules.
+  * For example, if we had a table of students who studied multiple subjects, creating multiple 'subject' columns would mean that the table was denormalised
+
+Example:
+
+| Student | Age | Email | Time 1 | Time 2 | Time 3 | Class 1 | Class 2 | Class 3 | Subject 1 | Subject 2 | Subject 3 |
+|----|----|----|----|----|----|----|----|----|----|----|----|
+| Karl Lingiah | 42 | karl@mail.com | Monday 10am | Tuesday 12pm | Wednesday 2pm | EL101 | FR120 | AH210 | English | French | Art |
+| Keri Silver | 28 | keri@mail.com | Thursday 4pm | | | EL101 | | | English | | |
+
+  * This is duplicative because there are multiple columns for what is effectively the same data (i.e. the data is interchangable - for 'Student' Karl Lingiah you could just as easily put French in the 'Subject 1' column and 'English' in the 'Subject 2' column, the same with the Time and Class columns)
+  * Denormalised tables restrict future growth; for example, what if you had a student that was studying four subjects?
+  * Even if you had a single 'Subject', 'Time' and 'Class' columns containing all of a student's subjects, this would still be duplicative and non-atomic; it would also lead to potential confusion - which class and teacher relate to which subject?
+  
+#### First Normal Form (1NF)
+
+  * First Normal Form sets very basic rules for an organised database
+    * Eliminate duplicative columns from the same table; i.e. do not duplicate data within the same **row** of a table (this is referred to as the atomicity of a table)
+    * Create separate tables for each group of related data and identify each row with unique column (or set of columns) and act as the *primary key*
+
+Example:
+
+| id | Student | Age | Email | Time | Class| Subject |
+|----|----|----|----|----|----|----|
+| 1 | Karl Lingiah | 42 | karl@mail.com | Monday 10am  | EL101 | English |
+| 2 | Karl Lingiah | 42 | karl@mail.com | Tuesday 12pm | FR120 |French |
+| 3 | Karl Lingiah | 42 | karl@mail.com | Wednesday 2pm | AH210 | Art |
+| 4 | Keri Silver | 28 | keri@mail.com | Thursday 4pm | EL101 | English |
+
+  * Here we have removed duplication from the *structure* of the table in that there are no duplicative columns; the relationship between the columns is *atomic* (there is one subject per student)
+  * Also there is a clear unique identifier for each row to act as the primary key (the id column). [Note: we couldn't simply use an existing column as the primary key because the values or not unique to each row]
+  * Although we've removed duplication in the *structure* of the table (by removing the multiple subject fields), as a result we now have duplication in the data, as one student has three rows of data
+
+#### Second Normal Form (2NF)
+
+  * Second normal form further addresses the concept of removing duplicative data
+  * Second normal form should meet all the requirements of first normal form
+  * Furthermore, 2NF should remove subsets of data that apply to multiple rows of a table and place them in separate tables
+  * 2NF should create relationships between these new tables and their predecessors through the use of foreign keys
+  * Essentially, 2NF attempts tot reduce the amount of redundant data in a table by extracting it and placing it in new tables and creting relationships between those tables
+
+Example:
+
+Student Table -
+
+| id | Student | Age | Email |
+|----|----|----|----|----|
+| 1 | Karl Lingiah | 42 | karl@mail.com | 
+| 2 | Keri Silver | 28 | keri@mail.com |
+
+Student Classes Table - 
+
+| student_id | Time | Class | Subject |
+|----|----|----|----|----|----|
+| 1 | Monday 10am  | EL101 | English |
+| 1 | Tuesday 12pm | FR120 | French |
+| 1 | Wednesday 2pm | AH210 | Art History |
+| 2 | Thursday 4pm | EL101 | English |
+
+  * Here we have removed the subsets of data that apply to multiple rows (all the data relating to the classes) and thus reduced the Student table to two rows
+  * We have created a relationship between the two tables using the `student_id` value in the Classes table, which acts as a foreign key for the `id` column of the Student table
+
+#### Third Normal Form (3NF)
+
+  * Third normal form should meet all the requirements of second normal form
+  * Furthermore, 3NF should remove columns that are not *dependent* on the primary key, meaning that any column's value should be derived from the primary key only and it should not be posible to derive a columns value from another column
+
+Example:
+
+  * In our 2NF example, the Student table already conforms to 3NF
+  * With the Classes table, if we think of a combination of the `student_id` and the `Time` as the Primary Key for the table, so `(student_id, Time)`, then the value of the Class column could be derived from the Primary Key (since a student can only attend one class at a particular time). So the Class column conforms to 3NF
+  * The value of the Subject column however can be derived from the Class column as well as from the Primary Key, so this does not conform to 3NF
+  * We can resolve this by extracting out the Class data to another table
+
+Student Table -
+
+| id | Student | Age | Email |
+|----|----|----|----|
+| 1 | Karl Lingiah | 42 | karl@mail.com | 
+| 2 | Keri Silver | 28 | keri@mail.com |
+
+Student Classes Table - 
+
+| student_id | Time | Class |
+|----|----|----|
+| 1 | Monday 10am | EL101 |
+| 1 | Tuesday 12pm | FR120 |
+| 1 | Wednesday 2pm | AH210 |
+| 2 | Thursday 4pm | EL201 |
+
+Class Table -
+
+| Class | Subject |
+|----|----|
+| EL101 | English |
+| FR120 | French |
+| AH210 | Art |
+| EL201 | English | 
+
+#### Boyce-Codd Normal Form or Third and a Half Normal Form (BCNF or 3.5NF)
+
+  * BCNF is an extension to 3NF and adds one more requirement: Every determinant must be a *candidate key*
+
+##### Candidate Keys
+
+  * A candidate key is a combination of attributes that can be uniquely used to identify a database record without referring to any other data. 
+  * A table can have one or more candidate keys; one of these is selected as the table Primary Key
+  * All candidate Keys share some common properties:
+    * For the lifetime of the candidate key, the sttribute used for identification must stay the same
+    * The value cannot be NULL
+    * The value must be unique
+
+  * In our Student Classes table, the Class can be determined by the combination of `student_id` and Time, as previously discussed; so this *combination key* is a determinant and also a candidate key
+  * However, assuming that there is only one class at a particular time, the value of the Time column could also be determined by the Class column, so Class is a determinant but it is **not** a candidate key because it is not unique
+
+
+sources:
+
+ - http://databases.about.com/od/specificproducts/a/normalization.htm
+ - https://www.dlsweb.rmit.edu.au/toolbox/knowmang/content/normalisation/bcnf.htm#Converting
+ - http://www.bkent.net/Doc/simple5.htm
+ - http://www.studytonight.com/dbms/database-normalization.php
 
 <a name="Performance"></a>
 ## Database Performance
