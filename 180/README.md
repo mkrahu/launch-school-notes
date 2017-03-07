@@ -25,6 +25,10 @@ Notes for [Launch School](https://launchschool.com/) Course 180
     * One to Many
     * Many to Many
 
+  * [Database Design and Performance](database_design_performance.md)
+    * Normalisation
+    * Database Performance (Indexing)
+
   * [PostreSQL](postgresql.md)
     * Command Line Interface
     * Meta Commands
