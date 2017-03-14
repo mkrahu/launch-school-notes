@@ -29,26 +29,29 @@ Notes for [Launch School](https://launchschool.com/) Course 180
     * Normalisation
     * Database Performance (Indexing)
 
-  * [PostreSQL](postgresql.md)
+  * [PostreSQL: Introduction](postgresql_intro.md)
     * Command Line Interface
     * Meta Commands
-    * PostgreSQl Documentation and Syntax
+    * PostgreSQl Documentation
     * PostgreSQL Data Types
-    * Data Definition
-      * Table Basics
-      * Default Values
-      * Constraints
-      * Modifying Tables
-      * Additional Topics (Privileges, Schemas, Inheritance, Partitioning)
-    * Data Manipulation
-      * Queries
-      * Inserting Data
-      * Updating Data
-      * Deleting Data
-      * Loading database dumps
-    * Data Control
-      * Client Authentication
-      * Database Roles
+  * [PostreSQL: Data Definition](postgresql_ddl.md)
+    * Table Basics
+    * Default Values
+    * Constraints
+    * System Columns
+    * Schemas
+    * Inheritance
+    * Partitioning
+  * [PostreSQL: Data Manipulation](postgresql_dml.md)
+    * Queries
+    * Inserting Data
+    * Updating Data
+    * Deleting Data
+    * Loading database dumps
+  * [PostreSQL: Data Control](postgresql_dcl.md)
+    * Client Authentication
+    * Database Roles
+  * [PostreSQL: Additional Topics](postgresql_additional.md)
     * Functions and Operators
     * Indexes
     * Additional Topics (Full Text Search, Performance Tips)
@@ -76,5 +79,6 @@ Notes for [Launch School](https://launchschool.com/) Course 180
 
 ## Resources
 
-  * PostgeSQL Documentation
+  * [PostgeSQL Documentation](https://www.postgresql.org/docs/9.6/static/index.html)
+    * [SQL Commands](https://www.postgresql.org/docs/9.6/static/sql-commands.html)
   * Sequel Documentation
