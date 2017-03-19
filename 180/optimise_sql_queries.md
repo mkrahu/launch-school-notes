@@ -3,6 +3,7 @@
   * [N + 1 Queries](#N-plus-1)
   * [Pushing Down Operations to the Database](#Push-to-DB)
   * [Subqueries](#Subqueries)
+  * [Explain]()
 
 <a name="N-plus-1"></a>
 ## N + 1 Queries
@@ -12,3 +13,7 @@
 
 <a name="Subqueries"></a>
 ## Subqueries
+
+
+https://launchschool.com/exercises/27dac993
+https://launchschool.com/exercises/549674f5
