@@ -875,3 +875,28 @@ UPDATE people SET name = 'Malkovich';
 
 <a name="Deleting"></a>
 ### Deleting Data
+
+  * As with inserting data, deleting data can only be carried out with regards to an entire row
+  * As with  updating data, deleting data is done by speciying conditions that the rows to be removed must match
+  * It is possible to remove a single row, multiple rows or all rows from a table
+  * Deletion of rows is carried out using the `DELETE` command
+  * The syntax is similar to the update command but without the `SET` clause
+
+Example:
+
+```psql
+DELETE FROM people WHERE name = 'Bill';
+```
+
+  * The condition following the `WHERE` clause indicates which row to delete; in this case all rows where the value in the `name` column is equal to 'Bill' will be deleted from the table
+    * If there are multiple rows that match this condition then all matching rows will be deleted
+    * If there are no rows that match the condition then no rows will be deleted
+
+  * **Note: If the `WHERE` clause is omitted, then _all_ rows are deleted from the table**
+
+```psql
+DELETE FROM people;
+```
+
+  * Documentation: https://www.postgresql.org/docs/9.6/static/dml-delete.html 
+  * Command reference: https://www.postgresql.org/docs/9.6/static/sql-delete.html
