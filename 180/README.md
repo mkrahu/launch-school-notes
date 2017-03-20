@@ -54,7 +54,6 @@ Notes for [Launch School](https://launchschool.com/) Course 180
   * [PostreSQL: Additional Topics](postgresql_additional.md)
     * Functions and Operators
     * Indexes
-    * Additional Topics (Full Text Search, Performance Tips)
 
   * [Interacting with a Datababase in Code](interact_db_in_code.md)
     * Executing SQL Statements from Ruby

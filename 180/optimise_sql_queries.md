@@ -17,3 +17,5 @@
 
 https://launchschool.com/exercises/27dac993
 https://launchschool.com/exercises/549674f5
+
+https://www.postgresql.org/docs/9.6/static/performance-tips.html (Explain)
