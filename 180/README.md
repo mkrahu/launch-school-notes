@@ -54,6 +54,7 @@ Notes for [Launch School](https://launchschool.com/) Course 180
   * [PostreSQL: Additional Topics](postgresql_additional.md)
     * Functions and Operators
     * Indexes
+  * [PostgreSQL Cheat Sheet](postgresql_cheatsheet.md)
 
   * [Interacting with a Datababase in Code](interact_db_in_code.md)
     * Executing SQL Statements from Ruby
@@ -69,15 +70,11 @@ Notes for [Launch School](https://launchschool.com/) Course 180
     * Pushing Down Operations to the Database
     * Subqueries
 
-  * [Working with a Database Interface Library](db_interface_lib.md)
-    * The sequel gem
-      * Useful sequel methods
-    * Sinatra and sequel web app
-
 ---------
 
 ## Resources
 
   * [PostgeSQL Documentation](https://www.postgresql.org/docs/9.6/static/index.html)
     * [SQL Commands](https://www.postgresql.org/docs/9.6/static/sql-commands.html)
-  * Sequel Documentation
+  * [PG Documentation]()
+  * [Sequel Documentation](http://sequel.jeremyevans.net/rdoc/files/README_rdoc.html)
