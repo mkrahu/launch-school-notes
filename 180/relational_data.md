@@ -57,7 +57,7 @@
 <a name="Cardinality-Modality"></a>
 ## Cardinality and Modality
 
-  * Cardinatlity and Modality are terms used when describing relationships between entities
+  * Cardinality and Modality are terms used when describing relationships between entities
   * Cardinality refers to the number of objects on each side of the relationship: one-to-one, one-to-many, many-to-many
   * Modality refers to whether the relationship is required (1) or optional (0)
     * If a relationship is required, it means that there has to be at least one instance of that entity
