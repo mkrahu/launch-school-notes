@@ -900,6 +900,150 @@ typeof(varB) == 'number' && isNaN(varB); // true
 <a name="looping-iteration"></a>
 ## Looping and Iteration
 
+  * Loops provide a way to execute a statement or blockof statements repeatedly while certain conditions are true
+
+### The 'while' Loop
+
+  * A `while` loop first evaluates the condition
+  * If the condition has a truthy value, it executes the statements in the loop body
+  * When execution reaches the end of the block, control passes back to the condition expresion again
+  * If the condition *still* has a truthy value, the process is repeated until the condition produces a falsy value
+  * An infinite loop results if the condition never produces a falsy value
+  * A `break` statement exits from a loop immediately
+  * A `continue` statement skips the current iteration of the loop and returns to the top of the loop
+
+Examples:
+
+```javascript
+// a simple while loop
+
+var counter = 0;
+var limit = 5;
+
+while (counter < limit) {
+  console.log(counter);
+  counter += 1;
+}
+
+
+// an infinite loop
+
+var counter = 0;
+var limit = 5;
+
+while (counter < limit) {
+  console.log(counter);
+}
+
+// using break
+
+var counter = 0;
+var limit = 5;
+
+while (true) {
+  counter += 1;
+  if (counter > limit) {
+    break;
+  }
+
+  console.log(counter);
+}
+
+// using continue
+
+var counter = 0;
+var limit = 5;
+
+while (true) {
+  counter += 1;
+  if (counter === 3) {
+    continue;
+  }
+
+  if (counter > limit) {
+    break;
+  }
+
+  console.log(counter);
+}
+```
+
+### The 'do...while' Loop
+
+  * The `do...while` loop is similar to the `while` loop, except it always iterates at least once (the `while` loop won't iterate if the condition is falsy)
+  * With `do...while`, JavaScript evaluates the condition after executing the loop body, so the loop body always executes once
+
+Example:
+
+```javascript
+var counter = 0;
+var limit = 0;
+
+do {
+  console.log(counter);
+  counter++;
+} while (counter < limit);
+```
+
+### The 'for' Loop
+
+  * The `for` loop is the most common looping structure in JavaScript
+  * It lets you combine the three elements used to control a loop in a single statement:
+    * Setting the initial state
+    * Evaluating a condition
+    * Making some sort of change before re-evaluating the condition
+  * Most `for` loops use an 'iterator' variable which, by convention, is commonly named `i` or `j`
+
+Example:
+
+```javascript
+for (initialExpession; condition; incrementExpression) {
+  // statements
+}
+
+for (var i = 0; i < 10; i++) {
+  console.log(i);
+}
+```
+
+  * The flow of execution for a `for` loop is as follows:
+    1. Execute initializaton statement (the statement may include variable declarations)
+    2. Evaluate the condition (the loop terminates if the condition has a falsy value)
+    3. Execute the body of the loop
+    4. Execute the increment expression
+    5. Return to step 2 for the next iteration
+
+  * You can skip any of the three components of the `for` statement and simply include them elsewhere in the code
+
+Examples:
+
+```javascript
+// initialization outside the loop
+
+var i = 0;
+for (; i < 10; i++) {
+  console.log(i);
+}
+
+// manually check condition within loop body to break out of the loop
+// if condition is omitted in 'for', JavaScript assumes true
+
+for (var i = 0; ; i++) {
+  if (i >= 10) {
+    break;
+  }
+
+  console.log(i);
+}
+
+// manually increment iterator in loop body
+
+for (var i = 0; i < 10;) {
+  console.log(i);
+  i++;
+}
+```
+
 <a name="resources"></a>
 ## Resources
 
