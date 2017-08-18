@@ -396,7 +396,7 @@ false && []; // false
 #### Logical Or (`||`)
 
   * For boolean values, returns `true` if at least one operands is `true`, `false` otherwise
-  * For non-boolean values, returns the first operand if it can be converted to `false`, the second operand otherwise
+  * For non-boolean values, returns the first operand if it can be converted to `true`, the second operand otherwise
 
 Examples:
 
@@ -766,7 +766,7 @@ true === 1 // false
   * A block is delimited by curly braces and groups zero or more statements together
   * An `if` statement can have an optional `else` clause. This runs when the `if` statement's condition evaluates as `false`
   * Another `if` statement may follow the `else` keyword; this lets you test multiple conditions
-  * When there are multiple conditions, only the first conditional statement which evaluates as true executes 
+  * When there are multiple conditions, only the first conditional statement which evaluates as true executes
   * `if` statments can also be nested, though statements with many nested levels can be difficult to parse mentally
   * When the expression in an `if` statement doesn't evaluate as boolean `true` or `false`, javaScript tries to translate the result to a boolean value
 
