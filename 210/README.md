@@ -82,3 +82,27 @@ Notes for [Launch School](https://launchschool.com/) Course 210
     * The Debugger
     * Code Snippets
     * Resources
+
+  * [List Processing and Functional Abstractions](list_processing_functional_abstractions.md)
+    * Passing Functions as Arguments
+    * Declarative Programming with Abstractions
+    * List Processing Abstractions
+    * Iteration
+    * Filtering / Selection
+    * Transformation
+    * Reducing
+    * Interrogation
+    * Sort
+    * Combining Abstractions
+    * Functional Abstractions on Objects
+    * Using Low-level Abstractions
+
+  * [String and Text Processing](string_and_text_processing.md)
+    * String Processing Patterns
+    * String Methods
+    * Regular Expressions
+
+  * [A General Problem Solving Approach](general_problem_solving_approach.md)
+    * The "PEDAC" Problem Solving Process
+    * Understanding the Problem and Writing Test Cases
+    * Data Structure and Algorithms
