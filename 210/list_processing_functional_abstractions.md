@@ -1,18 +1,18 @@
 # List Processing and Functional Abstractions
 
   * [Overview](#overview)
-    * [Passing Functions as Arguments](#functions-as-arguments)
-    * [Declarative Programming with Abstractions](#declarative-programming-abstractions)
-    * [List Processing Abstractions](#list-procesing-abstractions)
-      * [Iteration](#iteration)
-      * [Filtering / Selection](#filtering)
-      * [Transformation](#transformation)
-      * [Reducing](#reducing)
-      * [Interrogation](#interrogation)
-      * [Sorting](#sorting)
-    * [Combining Abstractions](#combining-abstractions)
-    * [Functional Abstractions on Objects](#functional-abstractions-objects)
-    * [Using Low-level Abstractions](#low-level-abstractions)
+  * [Passing Functions as Arguments](#functions-as-arguments)
+  * [Declarative Programming with Abstractions](#declarative-programming-abstractions)
+  * [List Processing Abstractions](#list-procesing-abstractions)
+    * [Iteration](#iteration)
+    * [Filtering / Selection](#filtering)
+    * [Transformation](#transformation)
+    * [Reducing](#reducing)
+    * [Interrogation](#interrogation)
+    * [Sorting](#sorting)
+  * [Combining Abstractions](#combining-abstractions)
+  * [Functional Abstractions on Objects](#functional-abstractions-objects)
+  * [Using Low-level Abstractions](#low-level-abstractions)
 
 <a name='overview'></a>
 ## Overview
