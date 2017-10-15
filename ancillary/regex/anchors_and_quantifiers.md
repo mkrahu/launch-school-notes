@@ -96,16 +96,107 @@ Examples:
 
   * A word boundary occurs at the beginning and end of a sequance of word characters
   * For the purposes of word boundary anchors, word characters are any characters denoted by the `\w` meta-character, so alphanumerics of both cases and underscore
-  * A word boundary occurs at the beginning or ending of a sequence of word characters bounded by either a whitespace or the begining or end of a string
+  * A word boundary occurs at the beginning or ending of a sequence of word characters bounded by either a whitespace or the begining or end of a string, or a non-alphanumeric character (e.g. `!` or `?`)
   * To anchor a regex to a word boundary, the `\b` meta-character is used
-  * There is also a non-word boundary meta-character `\B`, although its use is rarer
+  * There is also a non-word boundary meta-character `\B`, although its use is rarer. A non-word boundary occurs everywhere that a word boundary doesn't occur (e.g. between two alphanumeric characters)
   * Note, `\b` and `\B` do not work as word boundaries inside of character classes (i.e. you cannot use them inside square brackets)
 
 Examples:
 
 ```ruby
-'cat dog.'.match(/\bcat\b/) # matches
-'cat dog.'.match(/\bcat\B/) # does not match
-'cat dog.'.match(/\bdog.\b/) # does not match
-'cat dog.'.match(/\bdog.\B/) # matches
+'cat dog'.match(/\bcat\b/) # matches
+'cat dog'.match(/\bcat\B/) # does not match
+'cat dog'.match(/\bdog\b/) # matches
+'cat dog'.match(/\bdog\B/) # does not match
 ```
+
+## Quantifiers
+
+  * Quantifiers can be used to construct patterns that match sequences of various lengths
+
+Example:
+
+  * If you wanted to construct a regex that matched strings of three or more of any digit, you might try writing something like this, using alternation:
+
+```ruby
+/\b(\d\d\d\d\d\d|\d\d\d\d\d|\d\d\d\d|\d\d\d)\b/
+```
+
+  * The problem here is that it only matches strings of between three and six digits, strings of seven digits would not be matched. You can't simply keep adding digits forever using alternation.
+  * In this situation, quantifiers can be used to indicate 'quantities' of a character or pattern to be matched
+
+### Zero or More
+
+  * The `*` special character is the quantifier for zero or more
+  * When used, it matches zero or more occurences of the pattern to its left
+  * The `*` quantifier is often used with concatenation. If used to quantify a single pattern with no others concatenated, it will simply match every string, since it is matching *zero or more* occurences of the pattern
+  * Grouping parantheses can be used to enclose the pattern that you want to quantify
+
+Example:
+
+```ruby
+'cat'.match(/cat*/) # matches
+'car'.match(/cat*/) # matches
+'can'.match(/cat*/) # matches
+'cut'.match(/cat*/) # does not match
+```
+
+### One or More
+
+  * The `+` special character is the quantifier for one or more
+  * When used, it matches one or more occurences of the pattern to its left
+  * Note: not all regex engines offer the the `+` quantifier, but the Ruby and JavaScript engines do
+
+Example:
+
+```ruby
+'ca'.match(/cat+/) # does not match
+'cat'.match(/cat+/) # matches
+'catt'.match(/cat+/) # matches
+'cart'.match(/cat+/) # does not match
+```
+
+### Zero or One
+
+  * The `?` special character is the quantifier for zero or one
+  * When used, it matches one or one (but not more than one) occurences of the pattern to its left
+  * The `?` quantifier is often used with concatenation. If used to quantify a single pattern with no others concatenated, it will simply match every string, since it is matching *zero or one* occurences of the pattern
+
+```ruby
+'ct'.match(/co?t/) # matches
+'cot'.match(/co?t/) # matches
+'coot'.match(/co?t/) # does not match
+```
+
+### Ranges
+
+  * Sometimes zero or more, one or more, or zero or one are not specific enough to quantify the pattern that you want to match
+  * Ranges can be used to provide more precision
+  * The range quantifier consists of a pair of curly braces `{}` containing one or two (comma-separated) numbers
+    * If the braces contain one number, the quantifier matches that exact number of occurences of the pattern to its left
+    * If the braces contain two, comma-separated, numbers the quantifier matches occurences of the pattern to its left between the first number and the second number
+
+Example:
+
+```ruby
+'ct'.match(/ca{1}t/) # does not match
+'cat'.match(/ca{1}t/) # matches
+'caat'.match(/ca{1}t/) # does not match
+'ct'.match(/ca{1,4}t/) # does not match
+'cat'.match(/ca{1,4}t/) # matches
+'caat'.match(/ca{1,4}t/) # matches
+'caaat'.match(/ca{1,4}t/) # matches
+'caaaat'.match(/ca{1,4}t/) # matches
+'caaaaat'.match(/ca{1,4}t/) # does not match
+```
+
+### Greediness
+
+  * Quantifiers are **greedy** by nature. This means that they always try to match as many characters as possible
+    * For example, using the regex `/a[abc]*c/` against the string 'xabcbcbacy', it will match *all* the characters between 'x' and 'y', even though there are sections within those characters which match the regex on their own
+  * Most of the time, this greedy behaviour is what you want. Sometimes though you need to match the fewest number of characters possible; this is called a **lazy** match
+  * In Ruby and JavaScript, you can request a lazy match by adding a `?` just after the quantifier.
+    * For example, using the regex `/a[abc]*?c/` against the string 'xabcbcbacy', it will match 'abc' and 'ac', rather than simply *all* the characters between 'x' and 'y'
+  * The difference between greedy and lazy can be defined as:
+    * Greedy quantifiers keep going after they find an initial match, until the string stops matching the pattern
+    * Lazy quantifiers stop as soon as they find an initial match (though they can find another match later in the string as a separate match)
