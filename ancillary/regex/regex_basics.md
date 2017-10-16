@@ -1,7 +1,8 @@
 # Regular Expressions
 
   * [Overview](#overview)
-  * [Basic Matching](#basic-regex)
+    * [Basic Regex](#basic-regex)
+  * [Basic Matching](#basic-matching)
     * [Alphanumerics](#alphanumerics)
     * [Non-alphanumeric Characters](#non-alphanumerics)
     * [Concatenation](#concatenation)
@@ -26,7 +27,7 @@
     * This regex would match the string `'cat'`, even as part of a larger word, e.g. `'scatter'`, but would not match `'Cat'` or `'CAT'`
   * Regex patterns can be much more complex than this however, and incorporate various special characters, anchors and quantifiers in order to match very specific string patterns
 
-<a name='overview'></a>
+<a name='basic-matching'></a>
 ## Basic Matching
 
 <a name='alphanumerics'></a>

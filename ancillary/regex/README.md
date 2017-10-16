@@ -22,7 +22,7 @@ Notes for [Launch School](https://launchschool.com/) [Introduction to Regular Ex
       * Range of Characters
       * Negated Classes
       * Character Class Shortcuts
-  * [Anchors and Quantifiers](anchors_quantifiers.md)
+  * [Anchors and Quantifiers](anchors_and_quantifiers.md)
       * Anchors
         * Start/ End of line
         * Lines vs Strings
