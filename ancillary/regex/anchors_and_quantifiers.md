@@ -1,5 +1,18 @@
 # Anchors and Quantifiers
 
+  * [Anchors](#anchors)
+    * [Start/ End of line](#start-end-of-line)
+    * [Lines vs Strings](#lines-vs-strings)
+    * [Start/End of String](#start-end-of-string)
+    * [Word Boundaries](#word-boundaries)
+  * [Quantifiers](#quantifiers)
+    * [Zero or More](#zero-or-more)
+    * [One or More](#one-or-more)
+    * [Zero or One](#zero-or-one)
+    * [Ranges](#ranges)
+    * [Greediness](#greediness)
+
+<a name='anchors'></a>
 ## Anchors
 
   * Unlike other special characters used in regex, anchors don't actually match any characters
@@ -11,6 +24,7 @@
     * On a word boundary
     * On a non-word boundary
 
+<a name='start-end-of-line'></a>
 ### Start/ End of line
 
   * The `^` and `$` meta-characters are *anchors* which fix a regex match to the beginning or ending of a line of text
@@ -54,6 +68,7 @@ Examples:
 '<cat>'.match(/^cat$/) # does not match
 ```
 
+<a name='lines-vs-strings'></a>
 ### Lines vs Strings
 
   * There's some subtelty involved with how `^` and `$` work with Ruby
@@ -73,6 +88,7 @@ Examples:
 
   * The JavaScript regex engine does not make this distinction between lines and strings
 
+<a name='start-end-of-string'></a>
 ### Start/End of String
 
   * Since Ruby makes a distinction between atart/ end of line and start/ end of string, and `^` & `$` are used to anchor start and end of line, the Ruby regex engine provides other special characters to anchor start and end of string
@@ -92,6 +108,7 @@ Examples:
 'cat\ndog'.match(/\Adog\z/) # does not match
 ```
 
+<a name='word-boundaries'></a>
 ### Word Boundaries
 
   * A word boundary occurs at the beginning and end of a sequance of word characters
@@ -110,6 +127,7 @@ Examples:
 'cat dog'.match(/\bdog\B/) # does not match
 ```
 
+<a name='quantifiers'></a>
 ## Quantifiers
 
   * Quantifiers can be used to construct patterns that match sequences of various lengths
@@ -125,6 +143,7 @@ Example:
   * The problem here is that it only matches strings of between three and six digits, strings of seven digits would not be matched. You can't simply keep adding digits forever using alternation.
   * In this situation, quantifiers can be used to indicate 'quantities' of a character or pattern to be matched
 
+<a name='zero-or-more'></a>
 ### Zero or More
 
   * The `*` special character is the quantifier for zero or more
@@ -141,6 +160,7 @@ Example:
 'cut'.match(/cat*/) # does not match
 ```
 
+<a name='one-or-more'></a>
 ### One or More
 
   * The `+` special character is the quantifier for one or more
@@ -156,6 +176,7 @@ Example:
 'cart'.match(/cat+/) # does not match
 ```
 
+<a name='zero-or-one'></a>
 ### Zero or One
 
   * The `?` special character is the quantifier for zero or one
@@ -168,6 +189,7 @@ Example:
 'coot'.match(/co?t/) # does not match
 ```
 
+<a name='ranges'></a>
 ### Ranges
 
   * Sometimes zero or more, one or more, or zero or one are not specific enough to quantify the pattern that you want to match
@@ -190,6 +212,7 @@ Example:
 'caaaaat'.match(/ca{1,4}t/) # does not match
 ```
 
+<a name='greediness'></a>
 ### Greediness
 
   * Quantifiers are **greedy** by nature. This means that they always try to match as many characters as possible

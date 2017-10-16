@@ -1,8 +1,22 @@
 # Using Regular Expressions in Ruby and JavaScript
 
+  * [Overview](#overview)
+  * [Matching Strings](#matching-strings)
+  * [Splitting Strings](#splitting-strings)
+  * [Capturing Groups](#capturing-groups)
+  * [Transforming Strings](#transforming-strings)
+    * [Transformations in Ruby](#transformations-ruby)
+    * [Transformations in JavaScript](#transformations-javaScript)
+  * [Resources](#resources)
+  * [Cheatsheet](#cheatsheet)
+
+<a name='overview'></a>
+## Overview
+
   * There are many methods available in both Ruby and JavaScript that use regex.
   * Many of these are methods of the `Regexp` (Ruby) and `RegExp` (JavaScript) classes, but some of the most commonly used methods are those of the `String` classes of Ruby and JavaScript
 
+<a name='matching-strings'></a>
 ## Matching Strings
 
   * The `match` method is one of the most basic methods for matching regex patterns
@@ -33,6 +47,7 @@ if (text.match(/^https?:\/\/\S+$/)) {
     * Ruby's [String#scan](http://ruby-doc.org/core-2.4.2/String.html#method-i-scan) method; it is a global form of match that returns an array of all matching substrings
   * JavaScript's [String.prototype.match](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match) method
 
+<a name='splitting-strings'></a>
 ## Splitting Strings
 
   * Quite often when dealing with strings, they need to be split into smaller sub-strings in order to be processed or analysed.
@@ -52,6 +67,7 @@ Examples:
   * Ruby's [String#split](http://ruby-doc.org/core-2.4.2/String.html#method-i-split) method
   * JavaScript's [String.prototype.split](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) method
 
+<a name='capturing-groups'></a>
 ## Capturing Groups
 
   * Capturing groups are defined by grouping part of a match patterns in parentheses
@@ -69,11 +85,13 @@ Example:
 
   * This will match either a single-quote `'` or a double-quote `"`, followed by one or more characters, and then another quote of the same type as that captured by the capturing group
 
+<a name='transforming-strings'></a>
 ## Transforming Strings
 
   * Transforming strings with regex involves matching the string against a regex and using the results of the match to construct a new string
   * While regex-based transformations are conceptually similar in Ruby and JavaScript, the implementations are different
 
+<a name='transformations-ruby'></a>
 ### Transformations in Ruby
 
   * In Ruby, transformations are usually done using the `sub` and `gsub` methods (or `sub!` and `gsub!` for in-place transformations)
@@ -92,6 +110,7 @@ Example:
   * Ruby's [String#sub!](http://ruby-doc.org/core-2.4.2/String.html#method-i-gsub) method
   * Ruby's [String#gsub!](http://ruby-doc.org/core-2.4.2/String.html#method-i-gsub-21) method
 
+<a name='transformations-javaScript'></a>
 ### Transformations in JavaScript
 
   * In JavaScript, transformations are usually done using the `replace` method
@@ -106,6 +125,7 @@ Example:
 
   * JavaScript's [String.prototype.replace](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) method
 
+<a name='resources'></a>
 ## Resources
 
 ### Sites and Tutorials
@@ -124,6 +144,7 @@ Example:
   * [Introducing Regular Expressions](http://shop.oreilly.com/product/0636920012337.do)
   * [Mastering Regular Expressions](http://shop.oreilly.com/product/9780596528126.do)
 
+<a name='cheatsheet'></a>
 ## Cheatsheet
 
 ### Basic Matching

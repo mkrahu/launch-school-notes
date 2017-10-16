@@ -1,5 +1,15 @@
 # Regular Expressions
 
+  * [Overview](#overview)
+  * [Basic Matching](#basic-regex)
+    * [Alphanumerics](#alphanumerics)
+    * [Non-alphanumeric Characters](#non-alphanumerics)
+    * [Concatenation](#concatenation)
+    * [Alternation](#alternation)
+    * [Control Character Escapes](#control-character-escapes)
+    * [Ignoring Case](#ignoring-case)
+
+<a name='overview'></a>
 ## Overview
 
   * Regular Expressions, or 'regex' are used for tasks that involve testing, analyzing, and modifying strings
@@ -9,15 +19,17 @@
     * Extract substrings from a larger string
     * Modify parts of a string
 
+<a name='basic-regex'></a>
 ### Basic Regex
 
   * At their most basic, regex are expressed as a string of characters between two `/` characters, e.g. `/cat/`
     * This regex would match the string `'cat'`, even as part of a larger word, e.g. `'scatter'`, but would not match `'Cat'` or `'CAT'`
   * Regex patterns can be much more complex than this however, and incorporate various special characters, anchors and quantifiers in order to match very specific string patterns
 
-
+<a name='overview'></a>
 ## Basic Matching
 
+<a name='alphanumerics'></a>
 ### Alphanumerics
 
   * The simplest regex pattern is one that matches a specific alphanumerics character. For example `/s/` can match the character string `'s'` anywhere it appears inside of larger string, whether that's on its own or as part of a word.
@@ -41,6 +53,7 @@ Example:
 'cat'.match(/s/); // does not match
 ```
 
+<a name='non-alphanumerics'></a>
 ### Non-alphanumeric Characters
 
   * Regex can also match non-alphanumeric characters.
@@ -73,6 +86,7 @@ $ ^ * + ? . ( ) [ ] { } | \ /
   'cat'.match(/\?/); // does not match
   ```
 
+<a name='concatenation'></a>
 ### Concatenation
 
   * You can concatenate two or more regex patterns into a longer pattern
@@ -92,6 +106,7 @@ Example:
   * You can concatenate any pattern to another pattern to produce a longer regex, and can concatenate as many patterns as you need
   * Lots of concatenation of many complex patterns can soon become difficult to read, so this trade-off must be considered when using them
 
+<a name='alternation'></a>
 ### Alternation
 
   * Alternation is a simple way regex that can match one of several sub-patterns
@@ -112,6 +127,7 @@ Example:
   * the use of parentheses is not always required, but is strongly recommended. Parentheses are used for 'grouping' in regex
   * Since `(`, `|`, and `)` are beign used as meta-characters rather than literal instances of those characters, they do not need escaping
 
+<a name='control-character-escapes'></a>
 ### Control Character Escapes
 
   * Most programming languages use special 'control character escapes' in strings to represent certain characters that don't have a 'visual' representation.
@@ -121,6 +137,7 @@ Example:
     * `\A` and `\z` are anchors
     * `\x` and `\u` are special character code markers
 
+<a name='ignoring-case'></a>
 ### Ignoring Case
 
   * Regex are case-sensitive by default, i.e. if you want to match a lowercase `'s'`, you have to use a lowercase `s` in your pattern, and vice-versa

@@ -1,10 +1,22 @@
 # Character Classes
 
+  * [Overview](#overview)
+  * [Set of Characters](#set-of-characters)
+  * [Range of Characters](#range-of-characters)
+  * [Negated Classes](#negated-classes)
+  * [Character Class Shortcuts](#character-class-shortcuts)
+    * [Any Character](#any-character)
+    * [Whitespace](#whitespace)
+    * [Digits and Hex Digits](#digits-and-hex-digits)
+    * [Word Characters](#word-characters)
+
+<a name='overview'></a>
 ## Overview
 
   * Character classes are patterns that let you specify a 'set' of characters that you want to match
   * Character class patterns are expressed as a list of characters between square brackets
 
+<a name='set-of-characters'></a>
 ## Set of Characters
 
   * Character class patterns allow to define sets of characters, with each 'member' of that set being matched individually
@@ -41,6 +53,7 @@ Example:
     * `[`
     * `]`
 
+<a name='range-of-characters'></a>
 ## Range of Characters
 
   * Sometimes character classes might need to represented a natural sequence of characters; e.g. letters a-z.
@@ -65,7 +78,8 @@ Example:
 /[A-z]/ // covers all lowercase and uppercase alphabetic characters, but also non-alphanumeric characters between Z and a
 ```
 
-## Negated classes
+<a name='negated-classes'></a>
+## Negated Classes
 
   * Another useful feature of character classes is negation; negated classes are used to identify characters to *exclude* from the pattern
   * Negations are specified like ordinary character classes, except that they are prepended by a caret `^`
@@ -79,10 +93,12 @@ Examples:
 /[^0-9aeiou]/ // matches any character except numerics digits or lowercase alphanumerics
 ```
 
+<a name='character-class-shortcuts'></a>
 ## Character Class Shortcuts
 
   * Some character classes are used so often that many regex engines build in shortcuts for them
 
+<a name='any-character'></a>
 ### Any Character
 
   * This represents **any**, including alphanumerics, punctuation, whitespace, etc
@@ -97,6 +113,7 @@ Example:
 /./m // matches any character over mutliple lines (across newline characters)
 ```
 
+<a name='whitespace'></a>
 ### Whitespace
 
   * `\s` matches any whitespace characters and `\S` matches any non-whitespace characters
@@ -120,6 +137,7 @@ Examples:
 /[\sa]/ // matches any whitespace character OR any lowercase 'a'
 ```
 
+<a name='digits-and-hex-digits'></a>
 ### Digits and Hex Digits
 
   * Decimal digits (0-9) generally have their own character class shortcut
@@ -130,6 +148,7 @@ Examples:
   * `\H` matches any character except hexadecimal digits (in the Ruby regex engine)
   * These shortcuts may be used inside or outside square brackets
 
+<a name='word-characters'></a>
 ### Word Characters
 
   * `\w` matches word characters, which means all of the alphabetic characters (in both upper and lower case), all of the nuberical digits, and the underscore
