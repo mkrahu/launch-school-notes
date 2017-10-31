@@ -104,5 +104,8 @@ Notes for [Launch School](https://launchschool.com/) Course 210
 
   * [A General Problem Solving Approach](general_problem_solving_approach.md)
     * The "PEDAC" Problem Solving Process
-    * Understanding the Problem and Writing Test Cases
-    * Data Structure and Algorithms
+    * Understanding the Problem
+    * Writing Examples and Test Cases
+    * Data Structure
+    * Algorithms
+    * Translating a Solution into Code
