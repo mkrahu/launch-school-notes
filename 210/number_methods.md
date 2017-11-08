@@ -6,7 +6,7 @@
 
   * Returns a string representing the specified number object
 
-#### Arguments
+#### Parameters
 
   * A radix between 2 and 36, which specifies the base to use for representing numeric values. If no radix is supplied, JavaScript will infer the radix from the number on which the method is called
 
@@ -26,7 +26,7 @@ num.toString(2); // returns '101'
 
   * Parses a string and returns an integer of the specified radix/ base
 
-#### Arguments
+#### Parameters
 
   * A string to parse.
     * If the argument passed in is not a string it is first converted to a string by the `ToString` internal operation
@@ -51,7 +51,7 @@ Number.parseInt('010', 2); // returns 2
 
   * Parses a string and returns a foating point number
 
-#### Arguments
+#### Parameters
 
   * A string to parse.
 
@@ -71,7 +71,7 @@ Number.parseFloat('5'); // returns 5
 
   * Determines if a passed in value is an integer
 
-#### Arguments
+#### Parameters
 
   * A value to be tested
 
@@ -93,7 +93,7 @@ Number.isInteger('5'); // returns false
 
   * Determines if a passed in value is `NaN` and it's type is `Number`
 
-#### Arguments
+#### Parameters
 
   * A value to be tested
 

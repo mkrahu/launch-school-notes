@@ -6,7 +6,7 @@
 
   * Returns an array of the objects enumerable properties (or keys)
 
-#### Arguments
+#### Parameters
 
   * An object
 
@@ -30,7 +30,7 @@ Object.keys(myObject); // returns ["a", "b", "c"]
 
   * Returns an array of the values of the objects enumerable properties
 
-#### Arguments
+#### Parameters
 
   * An object
 
