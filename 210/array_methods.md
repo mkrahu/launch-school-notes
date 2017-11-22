@@ -222,202 +222,334 @@ Array.of(1, 2, 3); // [1, 2, 3]
 
 ### `Array.prototype.every()`
 
-  * Description
+  * Determines whether all elements in the array pass a test implemented by a provided callback function
 
 #### Parameters
 
-  *
+  * A callback function to test each element. Takes three arguments:
+    * The current element being processed in the array
+    * An optional index for the current element being processed in the array
+    * An optional array parameter, which is the array that the method was called on
+
+  * An optional argument to use as `this` when executing a callback
 
 #### Return Value
 
-  *
+  * A boolean. `true` if every the function returns a truthy value for every element in the array, `false` otherwise
 
 #### Example
 
 ```JavaScript
+[1, 2, 3, 4, 5].every(function(num) {
+  return num < 6;
+}); // true
 
+[1, 2, 3, 4, 5].every(function(num) {
+  return num < 4;
+}); // false
+
+[1, 2, 3, 4, 5].every(num => num < 6); // true (with arrow functions)
 ```
 
 ### `Array.prototype.some()`
 
-  * Description
+  * Determines whether at least one element in the array pass a test implemented by a provided callback function
 
 #### Parameters
 
-  *
+  * A callback function to test each element. Takes three arguments:
+    * The current element being processed in the array
+    * An optional index for the current element being processed in the array
+    * An optional array parameter, which is the array that the method was called on
+
+  * An optional argument to use as `this` when executing a callback
 
 #### Return Value
 
-  *
+  * A boolean. `true` if every the function returns a truthy value for at least one element in the array, `false` if none of the elements return a truthy value
 
 #### Example
 
 ```JavaScript
+[1, 2, 3, 4, 5].some(function(num) {
+  return num > 6;
+}); // false
 
+[1, 2, 3, 4, 5].some(function(num) {
+  return num > 4;
+}); // true
+
+[1, 2, 3, 4, 5].some(num => num > 6); // false (with arrow functions)
 ```
 
 ### `Array.prototype.includes()`
 
-  * Description
+  * Determines whether an array includes a certain element
 
 #### Parameters
 
-  *
+  * The element to search for
 
 #### Return Value
 
-  *
+  * A boolean, `true` if the array contains the element, `false` otherwise
 
 #### Example
 
 ```JavaScript
-
+['a', 'b', 'c'].includes('a'); // true
+['a', 'b', 'c'].includes('d'); // false
 ```
 
 ### `Array.prototype.find()`
 
-  * Description
+  * Returns the value of the first element that satisfies a test provided by a callback function
 
 #### Parameters
 
-  *
+  * A callback function to test each element. Takes three arguments:
+    * The current element being processed in the array
+    * An optional index for the current element being processed in the array
+    * An optional array parameter, which is the array that the method was called on
+
+  * An optional argument to use as `this` when executing a callback
 
 #### Return Value
 
-  *
+  * The value of the first element to pass the test
+  * `undefined` if no elements pass the test
 
 #### Example
 
 ```JavaScript
+[1, 2, 3, 4, 5].find(function(elem) {
+  return elem > 3;
+}); // 4
 
+[1, 2, 3, 4, 5].find(function(elem) {
+  return elem > 6;
+}); // undefined
+
+[1, 2, 3, 4, 5].find(elem => elem > 3); // 4 (using arrow functions)
 ```
 
 ### `Array.prototype.findIndex()`
 
-  * Description
+  * Returns the index of the first element in the array that passes a test provided by a callback function
 
 #### Parameters
 
-  *
+* A callback function to test each element. Takes three arguments:
+  * The current element being processed in the array
+  * An optional index for the current element being processed in the array
+  * An optional array parameter, which is the array that the method was called on
+
+* An optional argument to use as `this` when executing a callback
 
 #### Return Value
 
-  *
+  * The index of the first element in the array that passes the test
+  * `-1` if no elements pass the test
 
 #### Example
 
 ```JavaScript
+[1, 2, 3, 4, 5].findIndex(function(elem) {
+  return elem > 3;
+}); // 3
 
+[1, 2, 3, 4, 5].findIndex(function(elem) {
+  return elem > 6;
+}); // -1
+
+[1, 2, 3, 4, 5].findIndex(elem => elem > 3); // 3 (using arrow functions)
 ```
 
 ### `Array.prototype.indexOf()`
 
-  * Description
+  * Returns the first index at which a given element can be found
 
 #### Parameters
 
-  *
+  * The element to search for
+  * An option start index from which to begin searching
+    * If equal to or greater than the array's length, `-1` is returned
+    * If provided as a negative is taken as an offset from the end of the array. If the calculated negative index is less than `0`, then defaults to `0`
 
 #### Return Value
 
-  *
+  * The first index within the array at which the given element can be found
+  * `-1` if the element is not found
 
 #### Example
 
 ```JavaScript
-
+[1, 2, 1, 2, 1, 2].indexOf(2); // 1
+[1, 2, 1, 2, 1, 2].indexOf(3); // -1
+[1, 2, 1, 2, 1, 2].indexOf(2, 2); // 3
 ```
 
 ### `Array.prototype.lastIndexOf()`
 
-  * Description
+  * Returns the last index at which a given element can be found
 
 #### Parameters
 
-  *
+  * The element to search for
+  * An option start index from which to begin searching
+    * If equal to or greater than the array's length, `-1` is returned
+    * If provided as a negative is taken as an offset from the end of the array. If the calculated negative index is less than `0`, then defaults to `0`
 
 #### Return Value
 
-  *
+  * The last index within the array at which the given element can be found
+  * `-1` if the element is not found
 
 #### Example
 
 ```JavaScript
-
+[1, 2, 1, 2, 1, 2].lastIndexOf(2); // 5
+[1, 2, 1, 2, 1, 2].lastIndexOf(3); // -1
+[1, 2, 1, 2, 1, 2].lastIndexOf(1, 5); // -1
 ```
 
 ## Sorting, Filtering and Reducting
 
 ### `Array.prototype.filter()`
 
-  * Description
+  * Creates a new array containing elements from the original array which pass a test provided by a callback function
 
 #### Parameters
 
-  *
+  * A callback function to test each element. Takes three arguments:
+    * The current element being processed in the array
+    * An optional index for the current element being processed in the array
+    * An optional array parameter, which is the array that the method was called on
+
+  * An optional argument to use as `this` when executing a callback
 
 #### Return Value
 
-  *
+  * A new array containing the elements that passed the test
+  * returns an empty array if no elements pass the test
 
 #### Example
 
 ```JavaScript
+[1, 2, 3, 4, 5].filter(function(num) {
+  return num > 3
+}); // [4, 5]
+[1, 2, 3, 4, 5].filter(function(num) {
+  return num > 5
+}); // []
 
+[1, 2, 3, 4, 5].filter(num => num > 3); // [4, 5] (using arrow functions)
 ```
 
 ### `Array.prototype.reduce()`
 
-  * Description
+  * Applies a function against an accumulator, and iterates through each element in the array from left to right to reduce it to a single value
 
 #### Parameters
 
-  *
+  * A callback function to execute on each element. Takes four arguments:
+    * An accumulator. This accumulates the callback's return values. Its accumulated value is returned in the last invocation of the callback
+    * The current element being processed in the array. This is the first element in the array if an initial value is provided, the second otherwise
+    * An optional index for the current element being processed in the array. Starts at `0` if an initial value is provided, `1` otherwise
+    * An optional array parameter, which is the array that the method was called on
+
+  * An optional initial value to use as the first argument to the callback. If no initial value is provided then the first element of the array is used (if an empty array is reduced with no initial value, then an error is raised)
 
 #### Return Value
 
-  *
+  * The final value of the accumulator; i.e. the result of reducing all the values in the array according to the logic of the callback function
 
 #### Example
 
 ```JavaScript
+[1, 2, 3, 4, 5].reduce(function(total, num) {
+  return total + num;
+}); // 15
 
+[1, 2, 3, 4, 5].reduce(function(total, num) {
+  return total + num;
+}, 10); // 25
+
+[].reduce(function(total, num) {
+  return total + num;
+}); // TypeError
+
+[].reduce(function(total, num) {
+  return total + num;
+}, 0); // 0
+
+[1, 2, 3, 4, 5].reduce((total, num) => total + num); // 15 (using arrow function)
 ```
 
 ### `Array.prototype.reduceRight()`
 
-  * Description
+* Applies a function against an accumulator, and iterates through each element in the array from right to left to reduce it to a single value
 
 #### Parameters
 
-  *
+  * A callback function to execute on each element. Takes four arguments:
+    * An accumulator/ previous value. This accumulates the callback's return values. Its accumulated value is returned in the last invocation of the callback
+    * The current element being processed in the array. This is the last element in the array if an initial value is provided, the second from last otherwise
+    * An optional index for the current element being processed in the array. Starts at `array.length - 1` if an initial value is provided, `array.length - 2` otherwise
+    * An optional array parameter, which is the array that the method was called on
+
+  * An optional initial value to use as the first argument to the callback. If no initial value is provided then the last element of the array is used (if an empty array is reduced with no initial value, then an error is raised)
 
 #### Return Value
 
-  *
+* The final value of the accumulator; i.e. the result of reducing all the values in the array according to the logic of the callback function
 
 #### Example
 
 ```JavaScript
+['a', 'b', 'c', 'd', 'e'].reduceRight(function(accumulator, elem) {
+  return accumulator + elem;
+}); // 'edcba'
 
+[].reduceRight(function(accumulator, elem) {
+  return accumulator + elem;
+}); // TypeError
+
+[].reduceRight(function(accumulator, elem) {
+  return accumulator + elem;
+}, ''); // ''
 ```
 
 ### `Array.prototype.sort()`
 
-  * Description
+  * Sorts elements of an array *in place*, according to logic defined by an optional callback function.
 
 #### Parameters
 
-  *
+  * An optional callback function used to define the sorting logic. If omitted, the default is string Unicode code points.
+    * The compare function takes two arguments, the two elements being compared, and must return `0`, or an integer either greater than or less than `0`
+      * Less than `0` if the first element is less than the second element
+      * greater than `0` if the first element is greater than the second element
+      * `0` if they are equal; i.e. the sort order between them is arbitrary
 
 #### Return Value
 
-  *
+  * The sorted array
 
 #### Example
 
 ```JavaScript
+['c', 'a', 'd', 'e', 'b'].sort() // ['a', 'b', 'c', 'd', 'e']
 
+['c', 'a', 'd', 'e', 'b'].sort(function(a, b) {
+  if (a > b) {
+    return -1;
+  } else if (a < b) {
+    return 1;
+  } else {
+    return 0;
+  }
+}); // ['e', 'd', 'c', 'b', 'a']
 ```
 
 ## Adding, Removing, Slicing and Splicing
@@ -540,7 +672,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 
   *
 
-#### Return Value
+#### Return Value3
 
   *
 
