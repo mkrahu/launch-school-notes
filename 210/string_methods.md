@@ -455,7 +455,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 * An index within the string on which the method is called at which to begin the extraction
   * If the index is greater than or equal to the length of the string, an empty string is returned
   * If this value is negative, it is treated as 0
-  * If this value is less than index end, the two values are swapped
+  * If this value is greater than index end, the two values are swapped
 * An optional end index before which to end extraction
   * If omitted, then the portion of the string from the beginning index to the end of the string is extracted
   * If this value is negative, it is treated as 0
@@ -477,6 +477,47 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 'abcdef'.substring(4, 2); // 'cd'
 'abcdef'.substring(10); // ''
 ```
+
+### Similarities and differences between `slice`, `substr`, and `substring`
+
+  * They all return a portion of a larger string based on arguments passed to the methods
+  * All take a mandatory first argument and optional second argument
+
+#### First Argument
+
+  * For all three this is the **index at which extraction should begin**
+  * If the start index is greater than the length of the string to be extracted from, all three methods will return an empty string
+  * If negative:
+    * `slice` will treat as the length of the string minus the absolute version of the argument
+    * `substr` will treat as the length of the string minus the absolute version of the argument
+    * `substring` will treat as `0`.
+
+#### Second Argument
+
+  * They all take a second, optional argument:
+    * `slice` treats this as the **end index** before which extraction should end (i.e. if the end index is `5` then the character at index `4` should be included in the extracted string, but not the character at index `5`).
+    * `substr` treats this as a **length argument**, indicating the *number of characters to be extracted* from the start point.
+    * `substring` treats this as the **end index** before which extraction should end (i.e. if the end index is `5` then the character at index `4` should be included in the extracted string, but not the character at index `5`).
+
+  * If negative:
+    * `slice` will treat as the length of the string minus the absolute version of the argument
+    * `substr` will return an empty string
+    * `substring` will treat this as `0`
+
+  * If less than the first argument:
+    * `slice` will return an empty string
+    * `substr` will return will return the number of characters indicated by the argument, as long as it is not negative
+    * `substring` will effectively swap the two values
+
+  * If ommitted:
+    * With all three, all the characters from the start point to the end of the string are extracted. In this sense, using `slice`, `substr`, or `substring` with only one argument (as long as it is a positive integer) is identical in its results.
+
+#### When to use each
+
+  * If you you want to remove a specific number of chatracters from either end of a string, use `slice` with a negative second argument; e.g `slice(3, -3)` will remove three characters from either end of the string and return the rest
+  * If you want to extract a specific number of characters starting at a certain point use `substr`; e.g. `substr(3, 3)` will extract three characters from a string, starting at index `3`
+  * If you know the exact start and end indices for extraction use `substring`; e.g. `substring(3, 6)` will extract the characters at indices `3`, `4`, and `5`.
+
 
 [Similarities and Differences between Methods](https://stackoverflow.com/questions/2243824/what-is-the-difference-between-string-slice-and-string-substring)
 
