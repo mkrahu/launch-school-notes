@@ -556,148 +556,225 @@ Array.of(1, 2, 3); // [1, 2, 3]
 
 ### `Array.prototype.pop()`
 
-  * Description
+  * Removes the *last* element of an Array and returns it. Mutates the array.
 
 #### Parameters
 
-  *
+  * None. The method is called without parameters directly on the array.
 
 #### Return Value
 
-  *
+  * The removed element.
+  * `undefined` if the array is empty
 
 #### Example
 
 ```JavaScript
-
+var arr = [1, 2, 3];
+arr.pop(); // 3
+arr; // [1, 2]
+[].pop(); // undefined
 ```
 
 ### `Array.prototype.push()`
 
-  * Description
+  * Adds one or more elements to the **end** of an array.
 
 #### Parameters
 
-  *
+  * One or more elements to be added to the array (comma separated)
 
 #### Return Value
 
-  *
+  * The new length of the array.
 
 #### Example
 
 ```JavaScript
-
+var arr = [1, 2, 3]
+arr.push(4); // 4
+arr; // [1, 2, 3, 4]
+arr.push('a', 'b'); // 6
+arr; // [1, 2, 3, 4, "a", "b"]
 ```
 
 ### `Array.prototype.shift()`
 
-  * Description
+  * Removes the *first* element of an Array and returns it. Mutates the array.
 
 #### Parameters
 
-  *
+  * None. The method is called without parameters directly on the array.
 
 #### Return Value
 
-  *
+  * The removed element.
+  * `undefined` if the array is empty
 
 #### Example
 
 ```JavaScript
-
+var arr = [1, 2, 3];
+arr.shift(); // 1
+arr; // [2, 3]
+[].shift(); // undefined
 ```
 
 ### `Array.prototype.unshift()`
 
-  * Description
+  * Adds one or more elements to the **start** of an array.
 
 #### Parameters
 
-  *
+  * One or more elements to be added to the array (comma separated)
 
 #### Return Value
 
-  *
+  * The new length of the array.
 
 #### Example
 
 ```JavaScript
-
+var arr = [1, 2, 3]
+arr.unshift(4); // 4
+arr; // [4, 1, 2, 3]
+arr.unshift('a', 'b'); // 6
+arr; // ["a", "b", 4, 1, 2, 3]
 ```
 
 ### `Array.prototype.slice()`
 
-  * Description
+  * Creates a shallow copy of a portion of an array.
 
 #### Parameters
 
-  *
+  * An optional beginning index at which to begin extraction
+    * If negative it is taken as an offset from the end of the array
+    * If omitted, then defaults to `0`
+
+  * An optional end index before which to end extraction
+    * If negative it is taken as an offset from the end of the array
+    * If omitted, defaults to `array.length`
+    * If greater than `array.length` then defaults to `array.length`
+    * If less than the start index, an empty array is returned
 
 #### Return Value
 
-  *
+  * A new array containing the extracted elements
 
 #### Example
 
 ```JavaScript
-
+[1, 2, 3, 4, 5].slice(1, 3); // [2, 3]
+[1, 2, 3, 4, 5].slice(1, -1); // [2, 3, 4]
+[1, 2, 3, 4, 5].slice(1); // [2, 3, 4, 5]
 ```
 
 ### `Array.prototype.splice()`
 
-  * Description
+  * Removes existing elements and/ or adds new elements to an array
 
 #### Parameters
 
-  *
+  * An index at which to start changing the array.
+    * If greater than the length of the array, then will be set to the length of the array
+    * If negative it is taken as an offset from the end of the array. If the calculated index is less than `0` then it is set to `0`
+
+  * An optional delete count, indicating teh number of items to remove
+    * If omitted or larger than thenumber of elements from the start index to the end, then all the remaining elements are removed
+    * If `0` or negative, no elements are removed (in this case at least one new element should be specified)
+
+  * Zero or more optional new elements to add to the array, beginning at the start index. If omitted, `splice` will only remove elements
 
 #### Return Value
 
-  *
+  * An array containing the removed elements
+    * If only one elements is removed, an array containing one element is returned
+    * If no elements are removed, an emtpty array is returned
 
 #### Example
 
 ```JavaScript
+var arr = [1, 2, 3, 4, 5];
+arr.splice(3); // [4, 5]
+arr; // [1, 2, 3]
 
+var arr = [1, 2, 3, 4, 5];
+arr.splice(-4, 2); // [2, 3]
+arr; // [1, 4, 5]
+
+var arr = [1, 2, 3, 4, 5];
+arr.splice(1, 3, 'a', 'b', 'c'); // [2, 3, 4]
+arr; // [1, 'a', 'b', 'c', 5]
+
+var arr = [1, 2, 3, 4, 5];
+arr.splice(1, 0, 'a', 'b', 'c'); // []
+arr; // [1, 'a', 'b', 'c', 2, 3, 4, 5]
 ```
 
 ## Iteration
 
 ### `Array.prototype.forEach()`
 
-  * Description
+  * Executes a provided function once for each element in an array.
 
 #### Parameters
 
-  *
+  * A callback function to execute on each element. Takes three arguments:
+    * The current element being processed in the array
+    * An optional index for the current element being processed in the array
+    * An optional array parameter, which is the array that the method was called on
 
-#### Return Value3
+  * An optional argument to use as `this` when executing a callback
 
-  *
+#### Return Value
+
+  * `undefined`
 
 #### Example
 
 ```JavaScript
+var arr = [1, 2, 3];
 
+arr.forEach(function(elem) {
+  console.log(elem);
+}); // undefined
+
+//logs
+// 1
+// 2
+// 3
 ```
 
 ## Miscellaneous
 
 ### `Array.isArray()`
 
-  * Description
+  * Determines whether the value passed is an Array
 
 #### Parameters
 
-  *
+  * The object to be checked
 
 #### Return Value
 
-  *
+  * A boolean; `true` if the object is an array, `false` otherwise
 
 #### Example
 
 ```JavaScript
+Array.isArray([]); // true
+Array.isArray(new Array()); // true
+Array.isArray(new Array('a', 'b', 'c', 'd')); // true
+Array.isArray(new Array(3)); // true
+Array.isArray(Array.prototype); // true
 
+Array.isArray(); // false
+Array.isArray({}); // false
+Array.isArray(null); // false
+Array.isArray(undefined); // false
+Array.isArray(17); // false
+Array.isArray('Array'); // false
+Array.isArray(true); // false
+Array.isArray(false); // false
 ```
