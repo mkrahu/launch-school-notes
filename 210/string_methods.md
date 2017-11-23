@@ -2,7 +2,12 @@
 
   * [MDN String Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/prototype)
 
+  * [Searching](#searching)
+  * [Transforming](#transforming)
+  * [Slicing and Substrings](#slicing-and-substrings)
+  * [Trimming and Padding](#trimming-and-padding)
 
+<a name='searching'></a>
 ## Searching
 
 ### `String.prototype.charAt()`
@@ -179,6 +184,7 @@
 'ABC'.match(/A|B/g); // ["A", "B"]
 ```
 
+<a name='transforming'></a>
 ## Transforming
 
 ### `String.prototype.toString()`
@@ -384,6 +390,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 'abc1'.toUpperCase(); // 'ABC1'
 ```
 
+<a name='slicing-and-substrings'></a>
 ## Slicing and Substrings
 
 ### `String.prototype.slice()`
@@ -512,7 +519,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
   * If ommitted:
     * With all three, all the characters from the start point to the end of the string are extracted. In this sense, using `slice`, `substr`, or `substring` with only one argument (as long as it is a positive integer) is identical in its results.
 
-#### When to use each
+#### When to use each one
 
   * If you you want to remove a specific number of chatracters from either end of a string, use `slice` with a negative second argument; e.g `slice(3, -3)` will remove three characters from either end of the string and return the rest
   * If you want to extract a specific number of characters starting at a certain point use `substr`; e.g. `substr(3, 3)` will extract three characters from a string, starting at index `3`
@@ -521,6 +528,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 
 [Similarities and Differences between Methods](https://stackoverflow.com/questions/2243824/what-is-the-difference-between-string-slice-and-string-substring)
 
+<a name='trimming-and-padding'></a>
 ## Trimming and Padding
 
 ### `String.prototype.trim()`

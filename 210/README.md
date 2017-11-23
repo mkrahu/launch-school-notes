@@ -109,3 +109,22 @@ Notes for [Launch School](https://launchschool.com/) Course 210
     * Data Structure
     * Algorithms
     * Translating a Solution into Code
+
+  * [String Methods](string_methods.md)
+    * Searching
+    * Transforming
+    * Slicing and Substrings
+    * Trimming and Padding
+
+  * [Array Methods](array_methods.md)
+    * Array Creation
+    * Transformation
+    * Searching
+    * Sorting, Filtering and Reducing
+    * Adding, Removing, Slicing and Splicing
+    * Iteration
+    * Miscellaneous
+
+  * [Number Methods](number_methods.md)
+  
+  * [Object Methods](object_methods.md)

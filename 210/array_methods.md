@@ -2,7 +2,15 @@
 
   * [MDN Array Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 
+  * [Array Creation](#array-creation)
+  * [Transformation](#transformation)
+  * [Searching](#searching)
+  * [Sorting, Filtering and Reducing](#sorting-filtering-reducing)
+  * [Adding, Removing, Slicing and Splicing](#adding-removing-slicing-splicing)
+  * [Iteration](#iteration)
+  * [Miscellaneous](#miscellaneous)
 
+<a name='array-creation'></a>
 ## Array Creation
 
 ### `Array.from()``
@@ -50,6 +58,7 @@ Array.of(7);       // [7]
 Array.of(1, 2, 3); // [1, 2, 3]
 ```
 
+<a name='transformation'></a>
 ## Transformation
 
 ### `Array.prototype.map()`
@@ -218,6 +227,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ['a', 'b', 'c'].toString(); // 'a,b,c'
 ```
 
+<a name='searching'></a>
 ## Searching
 
 ### `Array.prototype.every()`
@@ -413,7 +423,8 @@ Array.of(1, 2, 3); // [1, 2, 3]
 [1, 2, 1, 2, 1, 2].lastIndexOf(1, 5); // -1
 ```
 
-## Sorting, Filtering and Reducting
+<a name='sorting-filtering-reducing'></a>
+## Sorting, Filtering and Reducing
 
 ### `Array.prototype.filter()`
 
@@ -552,6 +563,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 }); // ['e', 'd', 'c', 'b', 'a']
 ```
 
+<a name='adding-removing-slicing-splicing'></a>
 ## Adding, Removing, Slicing and Splicing
 
 ### `Array.prototype.pop()`
@@ -712,6 +724,7 @@ arr.splice(1, 0, 'a', 'b', 'c'); // []
 arr; // [1, 'a', 'b', 'c', 2, 3, 4, 5]
 ```
 
+<a name='iteration'></a>
 ## Iteration
 
 ### `Array.prototype.forEach()`
@@ -746,6 +759,7 @@ arr.forEach(function(elem) {
 // 3
 ```
 
+<a name='miscellaneous'></a>
 ## Miscellaneous
 
 ### `Array.isArray()`
