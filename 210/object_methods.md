@@ -5,6 +5,7 @@
 ### `Object.keys()`
 
   * Returns an array of the objects enumerable properties (or keys)
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
 
 #### Parameters
 
@@ -29,6 +30,7 @@ Object.keys(myObject); // returns ["a", "b", "c"]
 ### `Object.values()`
 
   * Returns an array of the values of the objects enumerable properties
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values)
 
 #### Parameters
 

@@ -5,6 +5,7 @@
 ### `Number.prototype.toString()`
 
   * Returns a string representing the specified number object
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
 
 #### Parameters
 
@@ -25,6 +26,7 @@ num.toString(2); // returns '101'
 ### `Number.parseInt()`
 
   * Parses a string and returns an integer of the specified radix/ base
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/parseInt)
 
 #### Parameters
 
@@ -50,6 +52,7 @@ Number.parseInt('010', 2); // returns 2
 ### `Number.parseFloat()`
 
   * Parses a string and returns a foating point number
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/parseFloat)
 
 #### Parameters
 
@@ -70,6 +73,7 @@ Number.parseFloat('5'); // returns 5
 ### `Number.isInteger()`
 
   * Determines if a passed in value is an integer
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger)
 
 #### Parameters
 
@@ -92,6 +96,7 @@ Number.isInteger('5'); // returns false
 ### `Number.isNaN()`
 
   * Determines if a passed in value is `NaN` and it's type is `Number`
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN)
 
 #### Parameters
 

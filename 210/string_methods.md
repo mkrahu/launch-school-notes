@@ -13,6 +13,7 @@
 ### `String.prototype.charAt()`
 
   * Returns the character at the specified index within a string
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt)
 
 #### Parameters
 
@@ -32,6 +33,7 @@
 ### `String.prototype.indexOf()`
 
   * Returns the index within a string of the first occurence of a specified substring
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf)
 
 #### Parameters
 
@@ -54,6 +56,7 @@
 ### `String.prototype.lastIndexOf()`
 
   * Returns the index within a string of the last occurence of a specified substring
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
 
 #### Parameters
 
@@ -76,6 +79,7 @@
 ### `String.prototype.includes()`
 
   * Determines whether a substring exists within another string
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 
 #### Parameters
 
@@ -97,6 +101,7 @@
 ### `String.prototype.startsWith()`
 
   * Determines whether a String begins with the characters of the specified search string
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)
 
 #### Parameters
 
@@ -120,6 +125,7 @@
 ### `String.prototype.endsWith()`
 
   * Determines whether a string ends with a specified substring
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith)
 
 #### Parameters
 
@@ -142,6 +148,7 @@
 ### `String.prototype.search()`
 
   * Executes a search for a match between a regular expression and a String object
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search)
 
 #### Parameters
 
@@ -164,6 +171,7 @@
 ### `String.prototype.match()`
 
   * Retreives the matches when matching a string against a regular expression
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
 
 #### Parameters
 
@@ -188,6 +196,7 @@
 ## Transforming
 
 ### `String.prototype.toString()`
+* [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toString)
 
   * Returns a String representing the specified String Object
 
@@ -210,6 +219,7 @@ a.toString(); // 'Hello'
 ### `String.prototype.valueOf()`
 
   * Returns the primitive value of a String object. Equivalent to `toString()`
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/valueOf)
 
 #### Parameters
 
@@ -230,6 +240,7 @@ a.valueOf(); // 'Hello'
 ### `String.fromCharCode()`
 
   * Returns a string created by using the specified sequence of Unicode Values
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode)
 
 #### Parameters
 
@@ -249,6 +260,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.charCodeAt()`
 
   * Returns an integer between 0 and 65535 representing the Unicode value of a character at a certain index in a string
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
 
 #### Parameters
 
@@ -267,11 +279,13 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.valueOf()`
 
   * Returns the primitive value of a String object. Equivalent to `toString()`
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/valueOf)
 
 
 ### `String.prototype.split()`
 
   * Splits a String object into an array of strings by separating them into substrings based on a specified separator
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)
 
 #### Parameters
 
@@ -293,6 +307,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.concat()`
 
   * Combines a string with one or more other Substrings
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/concat)
 
 #### Parameters
 
@@ -312,6 +327,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.replace()`
 
   * Replaces some or all matches of a pattern within the string on which the method is called with a 'replacement'
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
 
 #### Parameters
 
@@ -333,6 +349,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.repeat()`
 
   * Constructs a string consisting of a specified number of copies of the string on which the method is called
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat)
 
 #### Parameters
 
@@ -353,6 +370,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.toLowerCase()`
 
   * Transforms the string on which the method is called to a lowercase version of itself
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase)
 
 #### Parameters
 
@@ -373,6 +391,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.toUpperCase()`
 
   * Transforms the string on which the method is called to an uppercase version of itself
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase)
 
 #### Parameters
 
@@ -396,6 +415,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.slice()`
 
   * Extracts a specified section of a string
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice)
 
 #### Parameters
 
@@ -426,6 +446,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.substr()`
 
   * Extracts a specified section of a string
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substr)
 
 #### Parameters
 
@@ -455,7 +476,8 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 
 ### `String.prototype.substring()`
 
-* Extracts a specified section of a string
+  * Extracts a specified section of a string
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/substring)
 
 #### Parameters
 
@@ -535,6 +557,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 
   * Removes whitespace from both ends of a string.
   * Whitespace is considered to be all the whitespace characters (space, tab, no-break space, etc.) and all the line terminator characters (LF, CR, etc.).
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)
 
 #### Parameters
 
@@ -557,6 +580,8 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 
 * Removes whitespace from the left side of a string only.
 * Whitespace is considered to be all the whitespace characters (space, tab, no-break space, etc.) and all the line terminator characters (LF, CR, etc.).
+* **Note: this is a non-standard feature**
+* [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimLeft)
 
 #### Parameters
 
@@ -579,6 +604,8 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 
 * Removes whitespace from the right side of a string only.
 * Whitespace is considered to be all the whitespace characters (space, tab, no-break space, etc.) and all the line terminator characters (LF, CR, etc.).
+* **Note: this is a non-standard feature**
+* [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/TrimRight)
 
 #### Parameters
 
@@ -600,6 +627,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.padEnd()`
 
   * Pads the end of a string to a specified padding length using a specified padding string
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd)
 
 #### Parameters
 
@@ -624,6 +652,7 @@ String.fromCharCode(65, 66, 67);  // returns "ABC"
 ### `String.prototype.padStart()`
 
 * Pads the start of a string to a specified padding length using a specified padding string
+* [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
 
 #### Parameters
 

@@ -13,9 +13,10 @@
 <a name='array-creation'></a>
 ## Array Creation
 
-### `Array.from()``
+### `Array.from()`
 
   * Creates a new Array instance from an array-like or iterable object
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
 
 #### Parameters
 
@@ -42,6 +43,7 @@ Array.from({length: 5}, (v, i) => i); // [0, 1, 2, 3, 4
 ### `Array.of()`
 
   * Creates a new Array instance with a variable number of arguments
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/of)
 
 #### Parameters
 
@@ -64,6 +66,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.map()`
 
   * Creates a new array with the elements of the original array transformed by the results of calling a provided function on every element of the array
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 
 #### Parameters
 
@@ -97,6 +100,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.concat()`
 
   * Merges two or more arrays to return a new array. Does not affect the existing arrays
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)
 
 #### Parameters
 
@@ -117,6 +121,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 
   * Joins all elements of an Array to form a String
   * If the array contains non-string elements, they are coerced into strings before joining
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join)
 
 #### Parameters
 
@@ -142,6 +147,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 
   * Shallow copies part of an array to another location within the same array.
   * The target location must already contain an element (i.e. you cannot specify an undefiened index; `copyWithin` does not change the size of an array)
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin)
 
 #### Parameters
 
@@ -172,6 +178,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.fill()`
 
   * Fills elements in an array with a static value
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill)
 
 #### Parameters
 
@@ -194,6 +201,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.reverse()`
 
   * Reverses an array *in place*. The order of the array elements is reversed
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse)
 
 #### Parameters
 
@@ -212,6 +220,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.toString()`
 
   * Returns a string representing the specified array and its elements
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toString)
 
 #### Parameters
 
@@ -233,6 +242,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.every()`
 
   * Determines whether all elements in the array pass a test implemented by a provided callback function
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every)
 
 #### Parameters
 
@@ -264,6 +274,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.some()`
 
   * Determines whether at least one element in the array pass a test implemented by a provided callback function
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)
 
 #### Parameters
 
@@ -295,6 +306,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.includes()`
 
   * Determines whether an array includes a certain element
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
 
 #### Parameters
 
@@ -314,6 +326,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.find()`
 
   * Returns the value of the first element that satisfies a test provided by a callback function
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
 
 #### Parameters
 
@@ -346,6 +359,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.findIndex()`
 
   * Returns the index of the first element in the array that passes a test provided by a callback function
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
 
 #### Parameters
 
@@ -378,6 +392,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.indexOf()`
 
   * Returns the first index at which a given element can be found
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
 
 #### Parameters
 
@@ -402,6 +417,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.lastIndexOf()`
 
   * Returns the last index at which a given element can be found
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf)
 
 #### Parameters
 
@@ -429,6 +445,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.filter()`
 
   * Creates a new array containing elements from the original array which pass a test provided by a callback function
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
 
 #### Parameters
 
@@ -460,6 +477,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.reduce()`
 
   * Applies a function against an accumulator, and iterates through each element in the array from left to right to reduce it to a single value
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
 
 #### Parameters
 
@@ -499,7 +517,8 @@ Array.of(1, 2, 3); // [1, 2, 3]
 
 ### `Array.prototype.reduceRight()`
 
-* Applies a function against an accumulator, and iterates through each element in the array from right to left to reduce it to a single value
+  * Applies a function against an accumulator, and iterates through each element in the array from right to left to reduce it to a single value
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight)
 
 #### Parameters
 
@@ -534,6 +553,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.sort()`
 
   * Sorts elements of an array *in place*, according to logic defined by an optional callback function.
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 
 #### Parameters
 
@@ -569,6 +589,7 @@ Array.of(1, 2, 3); // [1, 2, 3]
 ### `Array.prototype.pop()`
 
   * Removes the *last* element of an Array and returns it. Mutates the array.
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop)
 
 #### Parameters
 
@@ -591,6 +612,7 @@ arr; // [1, 2]
 ### `Array.prototype.push()`
 
   * Adds one or more elements to the **end** of an array.
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)
 
 #### Parameters
 
@@ -613,6 +635,7 @@ arr; // [1, 2, 3, 4, "a", "b"]
 ### `Array.prototype.shift()`
 
   * Removes the *first* element of an Array and returns it. Mutates the array.
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift)
 
 #### Parameters
 
@@ -635,6 +658,7 @@ arr; // [2, 3]
 ### `Array.prototype.unshift()`
 
   * Adds one or more elements to the **start** of an array.
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)
 
 #### Parameters
 
@@ -657,6 +681,7 @@ arr; // ["a", "b", 4, 1, 2, 3]
 ### `Array.prototype.slice()`
 
   * Creates a shallow copy of a portion of an array.
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice)
 
 #### Parameters
 
@@ -685,6 +710,7 @@ arr; // ["a", "b", 4, 1, 2, 3]
 ### `Array.prototype.splice()`
 
   * Removes existing elements and/ or adds new elements to an array
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
 
 #### Parameters
 
@@ -730,6 +756,7 @@ arr; // [1, 'a', 'b', 'c', 2, 3, 4, 5]
 ### `Array.prototype.forEach()`
 
   * Executes a provided function once for each element in an array.
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)
 
 #### Parameters
 
@@ -765,6 +792,7 @@ arr.forEach(function(elem) {
 ### `Array.isArray()`
 
   * Determines whether the value passed is an Array
+  * [MDN Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray)
 
 #### Parameters
 
