@@ -881,7 +881,8 @@ typeof(NaN); // number -- NaN is actually a number in terms of data type
 10 > NaN; // false
 
 NaN == NaN; // false
-isNaN(NaN;) // true
+isNaN(NaN); // true
+isNaN(1); // false
 ```
 
   * Since `isNaN` returns true for any value that is not a number, including any non-numeric data type, if we want to check if a value is equal to `NaN`, we must also check if its type is numeric
