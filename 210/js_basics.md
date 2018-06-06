@@ -391,6 +391,7 @@ true && false; // false
 false && true; // false
 false && false; // false
 false && []; // false
+true && []; // [] returns the second operand since the first can't be converted to false
 ```
 
 #### Logical Or (`||`)
