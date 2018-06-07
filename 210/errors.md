@@ -25,7 +25,7 @@
 
 Example:
 
-```JavaScript
+```
 a;             // Uncaught ReferenceError: a is not defined(…)
 a();           // Uncaught ReferenceError: a is not defined(…)
 ```
@@ -38,7 +38,7 @@ a();           // Uncaught ReferenceError: a is not defined(…)
 
 Example:
 
-```JavaScript
+```
 var a;
 typeof a; // undefined
 a.name;   // Uncaught TypeError: Cannot read property 'name' of undefined(…)
@@ -53,7 +53,7 @@ a();      // Uncaught TypeError: a is not a function(…)
 
 Example:
 
-```JavaScript
+```
 function ( {}   // SyntaxError: Unexpected token (
 ```
 
@@ -61,8 +61,8 @@ function ( {}   // SyntaxError: Unexpected token (
 
 Example:
 
-```JavaScript
-JSON.parse('not really JSON'); // SyntaxError: Unexpected token i in JSON at position 0
+```
+JSON.parse('not really JSON'); // SyntaxError: Unexpected token o in JSON at position 1
 ```
 
 <a name='preventing-errors'></a>
@@ -72,7 +72,7 @@ JSON.parse('not really JSON'); // SyntaxError: Unexpected token i in JSON at pos
   * In order to do this, you need to anticipate where they can occur.
   * One of the most common places errors can occur is with unexpected input, for example if your funciton is expecting a string of one or more characters and an empty string is input:
 
-```JavaScript
+```
 function lowerInitial(word) {
   return word[0].toLowerCase();
 }
@@ -95,7 +95,7 @@ lowerInitial('');          // TypeError: Cannot read property 'toLowerCase' of u
 
 Example:
 
-```JavaScript
+```
 function lowerInitial(word) {
   if (word.length === 0) {          // If word contains an empty String,
     return '-';                     // return a dash instead of proceeding.
@@ -129,7 +129,7 @@ function lowerInitial(word) {
   * The syntax for these blocks is similar to `if/else` blocks:
 
 
-```JavaScript
+```
 try {
   // Do something that might fail here and throw an Error.
 } catch (error) {
@@ -144,7 +144,7 @@ try {
 
 Example:
 
-```JavaScript
+```
 function parseJSON(data) {
   var result;
 
