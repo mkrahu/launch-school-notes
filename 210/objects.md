@@ -146,7 +146,7 @@ var countriesAndCapitals = {
   'Spain': 'Madrid',
 }
 
-for (countries in countriesAndCapitals) {
+for (country in countriesAndCapitals) {
   console.log(country);
   console.log(countriesAndCapitals[country]);
 }
