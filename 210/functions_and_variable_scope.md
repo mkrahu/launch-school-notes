@@ -41,19 +41,19 @@ function triple(number) {
 Example:
 
 ```javascript
-// here, a and b are parameters within the method declaration
+// here, a and b are parameters within the function declaration
 
 function multiply(a, b) {
   return a * b;
 }
 
-// here, 5 and 6 are arguments to the method
+// here, 5 and 6 are arguments to the function
 
-multiply(5, 6); 
+multiply(5, 6);
 ```
 
   * During execution, JavaScript makes arguments passed to the function available to the function as local variables with the same names as the function's parameters
-  * Within the fucntion body these are referred to as local variables arguments
+  * Within the fucntion body these are referred to as local variable arguments
 
 <a name="invocations-arguments"></a>
 ## Function Invocations and Arguments
@@ -65,14 +65,14 @@ multiply(5, 6);
 Example:
 
 ```javascript
-fuunction greeting() {
+function greeting() {
   console.log('Hello');
 }
 
 greeting(); // logs Hello
 
 var hello = greeting;
-greeting(); // logs Hello
+hello(); // logs Hello
 ```
 
   * Many functions require parameters to fulfil their purpose
@@ -102,7 +102,7 @@ function circumference(radius) {
 
 <a name="lexical-scoping"></a>
 ## Functional Scopes and Lexical Scoping
-  
+
   * A variable's scope is the part of the program that can access that variable by name
   * In JavaScript, every function creates a new variable scope
 
@@ -181,9 +181,9 @@ logCount(); // closure sees new value for count and logs 2
 ### Lexical Scoping
 
   * JavaScript uses *lexical scoping* to resolve variables
-  * The structure of the code defines teh scope
+  * The structure of the code defines the scope
   * At any point in a JavaScript program, there is a hierarchy of scopes from local up to global
-  * When JavaScript encounters a varaible it searches the hierarchy from bottom to top and stops at the first variable it finds with a matching name
+  * When JavaScript encounters a varaible it searches the hierarchy from bottom to top and stops at the first variable declaration it finds with a matching name
   * Variables in a 'lower' scope can *shadow*, or hide, variables of the same name in a higher scope
 
 ### Adding Varaibles to the Current Scope
@@ -272,7 +272,7 @@ inner(); // can't access the local scope from here
 
 Example:
 
-```javascript
+```
 var hello = function() {
   return 'hello';
 
@@ -304,20 +304,20 @@ foo(); // Uncaught ReferenceError: foo is not defined
 ### Hoisting for Variable Declarations
 
   * JavaScript processes variable declarations **before** it executes any code within a scope
-  * Declaring a varaible anywhere in a scope is equivalent to declaring it at the top of the scope
-  * This behaviour is called *hoisting**; JavaScript effectively moves the variable declarations to the top of the scope
-  * JavaScript only hoists varaible declarations, not assignments
+  * Declaring a variable anywhere in a scope is equivalent to declaring it at the top of the scope
+  * This behaviour is called *hoisting*; JavaScript effectively moves the variable declarations to the top of the scope
+  * JavaScript only hoists variable **declarations**, not **assignments**
 
 Example:
 
-```javascript
+```
 var a = 1;
 var b = 2;
 ```
 
 is equivalent to:
 
-```javascript
+```
 var a; // at this point the variables have a value of undefined
 var b;
 
@@ -328,11 +328,11 @@ b = 2;
 ### Hoisting for Function Declarations
 
   * JavaScript also hoists Function declarations to the top of the scope
-  * It hoists the entire function declaration, including the body (i.e. the value of the 'function variable')
+  * It hoists the **entire** function declaration, including the body (i.e. the value of the 'function variable')
 
 Example:
 
-```javascript
+```
 console.log(hello_world());
 
 function hello_world() {
@@ -342,7 +342,7 @@ function hello_world() {
 
 is equivalent to:
 
-```javascript
+```
 function hello_world() {
   return 'hello world!';
 }
@@ -357,7 +357,7 @@ console.log(hello_world()); // logs "hello world"
 
 Example:
 
-```javascript
+```
 console.log(hello_world());
 
 function hello_world = function() {
@@ -367,7 +367,7 @@ function hello_world = function() {
 
 is equivalent to:
 
-```javascript
+```
 var hello_world;
 
 console.log(hello_world()); // produces "Uncaught TypeError: hello_world is not a function"
@@ -377,7 +377,7 @@ hello_world = function() {
 }
 ```
 
-  * Here we are calling `hello_world()` as if it were a function in our `console.log()`, but it hasn't been assigned to the anonymous functin yet since only the variable declaration has been hoisted.
+  * Here we are calling `hello_world()` as if it were a function in our `console.log()`, but it hasn't been assigned to the anonymous function yet since only the variable declaration has been hoisted.
 
 ### Hoisting Variable and Function Declarations
 
@@ -385,7 +385,7 @@ hello_world = function() {
 
 Example:
 
-```javascript
+```
 function hello() {
   var b = 'hello';
   return a;
@@ -401,7 +401,7 @@ hello();
 
 is equivalent to:
 
-```javascript
+```
 function hello() {
   var b;
   var a;
@@ -424,7 +424,7 @@ hello();
 
 Example 2:
 
-```javascript
+```
 function foo() {};
 var foo;
 
@@ -437,7 +437,7 @@ console.log(bar);
 
 is equivalent to:
 
-```javascript
+```
 function foo() {};
 function bar() {};
 
