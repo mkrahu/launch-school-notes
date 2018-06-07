@@ -45,4 +45,4 @@
   * The `RegExp` object lets you use the following methods (as well as several others):
     * [RegExp.prototype.exec](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec)
     * [RegExp.prototype.test](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test)
-  * More general notes on Regex, and how they are used, are [available here](#)
+  * More general notes on Regex, and how they are used, are [available here](https://github.com/superchilled/launch-school-notes/tree/master/ancillary/regex)
