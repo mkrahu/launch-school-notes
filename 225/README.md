@@ -1,4 +1,4 @@
-# 210: Object Oriented JavaScript
+# 225: Object Oriented JavaScript
 
 Notes for [Launch School](https://launchschool.com/) Course 225
 
