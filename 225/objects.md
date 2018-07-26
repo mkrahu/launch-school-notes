@@ -193,8 +193,205 @@ changeVal(myObjRef);
 // So when we reassign the `a` property of the object in the function, this affects the object itself and not just a copy of it.
 ```
 
-<a name="functions-object-factories"></a>
-## Functions as Object Factories
+### Objects as Object properties
+
+  * Object properties can either be Primitive values or other Objects
+  * These values behave in the same way as object properties as they would do if assigned to a variable
+    * Properties whose values are primitives are not mutable, they can only be reassigned
+    * Properties whose values are objects actually have a reference to the object as their value, not the object itself, these properties are therefore mutable.
+
+**Example**
+
+```
+var myObj = {
+  a: 1,
+  b: [1, 2, 3]
+}
+
+myObj.a = 2; // the value of the a property cannot be mutated, but a can be reassigned to another value
+myObj.b.pop(); // calling the Array.pop() method on b mutates the array to which the reference assigned to b points
+
+myObj; // { a: 2, b: [1, 2] } a has been assigned a new value, whereas the array referenced by b has been mutated
+```
+
+  * This is an important thing to understand when making copies of objects
+    * For properties that have primitive values, copying the value creates a new primitive
+    * For properties that have object/ reference values, copying the value creates a new reference to the same object
+
+**Example**
+
+```
+var myObj = {
+  a: 1,
+  b: [1, 2, 3]
+}
+
+var myObj2 = Object.assign({}, myObj);
+// Object.assign copies the values of all enumerable own properties from one or more source objects to a target object.
+// Here we are copying the values of myObj to an empty object
+// myObj2 is a NEW object with the same properties as myObj
+
+myObj2.a = 2; // this affects only the value of a in myObj2
+myObj2.b.pop(); // this affects the array referenced by b in both myObj2 AND myObj
+
+myObj; // { a: 1, b: [1, 2] } a is still 1 here, but a number has been removed from the b array
+myObj2; // { a: 2, b: [1, 2] } a is 2 here and a number has been removed from the b array
+```
 
 <a name="object-orientation"></a>
 ## Object Orientation
+
+  * Objected-oriented programming is a pattern that uses objects as the basic building blocks of a program instead of variables and functions
+
+**Example**
+
+```
+// imagine that we need to store some values about a car. We could just use variables like this
+
+var fuel = 7.9;
+var mpg = 37;
+
+// if we need to store values for multiple vehicles, we would need multiple variables. THese would need to be named in a way that identifies which variable goes with which vehicle
+
+var smallCarFuel = 7.9;
+var smallCarMpg = 37;
+
+var largeCarFuel = 9.4;
+var largeCarMpg = 29;
+
+var truckFuel = 14.4;
+var truckMpg = 23;
+
+// with an Objected-oriented approach, we would group these values into objects using properties
+
+var smallCar = {
+  fuel: 7.9,
+  mpg: 37,
+};
+
+var largeCar = {
+  fuel: 9.4,
+  mpg: 29,
+};
+
+var truck = {
+  fuel: 14.4,
+  mpg: 23,
+};
+```
+
+  * Grouping values like this into objects also makes it easier if we need to interact with those values in a context where the grouping logically fits the interaction
+
+**Example**
+
+```
+// say we want to calculate a vehicle's range using its fuel and mpg values
+// without objects, we could define a function and call that function passing in the different sets of varaibles each time
+
+function vehicleRange(fuel, mpg) {
+  return fuel * mpg;
+}
+
+vehicleRange(smallCarFuel, smallCarMpg); // => 292.3
+vehicleRange(largeCarFuel, largeCarMpg); // => 272.6
+vehicleRange(truckFuel, truckMpg);       // => 331.2
+
+// with an oo approach, we define our function in a way that interacts with the properties of an object passed into the function
+
+function vehicleRange(vehicle) {
+  return vehicle.fuel * vehicle.mpg;
+}
+
+vehicleRange(smallCar);     // => 292.3
+vehicleRange(largeCar);     // => 272.6
+vehicleRange(truck);        // => 331.2
+```
+
+  * We can go further still by defining the function as a property of the object and then calling that function as a method with the object as the receiver.
+
+**Example**
+
+```
+var smallCar = {
+  fuel: 7.9,
+  mpg: 37,
+  range: function() {
+    return this.fuel * this.mpg;
+  },
+};
+
+smallCar.range();   // => 292.3
+```
+
+  * Using objects to group together attributes and behaviours can make code easier to read an maintain. Objects:
+    * organize related data and code together.
+    * are useful when a program needs more than one instance of something.
+    * become more useful as the codebase size increases.
+
+  * Object oriented code makes these questions easier to answer:
+    * What are the important concepts in the program?
+    * What are the properties of a vehicle?
+    * How do we create vehicles?
+    * What operations can I perform on a vehicle?
+    * Where should we add new properties and methods?
+
+<a name="functions-object-factories"></a>
+## Functions as Object Factories
+
+  * Organising data into objects can have many benefits, but doing this alone can still lead to a lot of duplication. For example we have to define the properties and methods in each object we create:
+
+**Example**
+
+```
+var smallCar = {
+  fuel: 7.9,
+  mpg: 37,
+  range: function() {
+    return this.fuel * this.mpg;
+  },
+};
+
+var largeCar = {
+  fuel: 9.4,
+  mpg: 29,
+  range: function() {
+    return this.fuel * this.mpg;
+  },
+};
+
+var truck = {
+  fuel: 14.4,
+  mpg: 23,
+  range: function() {
+    return this.fuel * this.mpg;
+  },
+};
+```
+
+  * One thing we can do is use a function to create objects that have the same properties nad methods, but store different values for those properties
+
+**Example**
+
+```
+function makeVehicle(fuel, mpg) {
+  return {
+    fuel: fuel,
+    mpg: mpg,
+    range: function() {
+      return this.fuel * this.mpg;
+    },
+  };
+}
+
+var smallCar = makeVehicle(7.9, 37);
+smallCar.range();   // => 292.3
+
+var largeCar = makeVehicle(9.4, 29);
+largeCar.range();   // => 272.6
+
+var truck = makeVehicle(14.4, 23);
+truck.range();      // => 331.2
+```
+
+  * This approach of using functions to create objects is known as the **factory pattern** of object creation
+  * There are other object creation patterns, and each have their pros and cons
