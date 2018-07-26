@@ -393,5 +393,5 @@ var truck = makeVehicle(14.4, 23);
 truck.range();      // => 331.2
 ```
 
-  * This approach of using functions to create objects is known as the **factory pattern** of object creation
+  * This approach of using functions to create and return objects is known as the **factory pattern** of object creation
   * There are other object creation patterns, and each have their pros and cons

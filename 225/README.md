@@ -9,10 +9,11 @@ Notes for [Launch School](https://launchschool.com/) Course 225
   * [Objects](objects.md)
     * Objects and Methods
     * Mutating Objects
-    * Functions as Object Factories
     * Object Orientation
+    * Functions as Object Factories
 
   * [Function Contexts and Objects](function_contexts_and_objects.md)
+    * First class functions
     * The Global Object
     * Implicit and Explicit Function Execution Contexts
     * Hard Binding Functions with Contexts
