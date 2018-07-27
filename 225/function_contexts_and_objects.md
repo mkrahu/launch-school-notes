@@ -226,5 +226,95 @@ boundWhatIsThis.apply(otherFoo) == foo; // true
 <a name="context-loss"></a>
 ## Dealing with Context Loss
 
+  * The fact that a function's execution context is determined at the point of invocation means that care must be taken to ensure that we don't inadvertently change the context without intending to
+  * There are various different situations where execution context can change and a function can 'lose' its original context
+  * There are also a number of ways in which this 'context loss' can be dealt with, depending on the situation
+
+### Methods losing context when taken out of an object
+
+  * If you remove a method from its containing object and execute it, it loses its original context (the context instead becomes the global object)
+
+**Example**
+
+```
+var myObj = {
+  a: 1,
+  myMethod: function() {
+    console.log('The value of a is ' + this.a);
+  }
+};
+
+var myFunc = myObj.myMethod; // this strips the function of its context
+myFunc(); // 'The value of a is undefined'
+```
+
+  * You could use `call` or `apply` to restore the context, but if you don't want to execute the function right away or you need to pass it to another function, then `myObj` could be out of scope
+
+**Example**
+
+```
+function callOtherFunction(func) {
+  func.call(myObj); // myObj is out of scope
+}
+
+function foo() {
+  var myObj = {
+    a: 1,
+    myMethod: function() {
+      console.log('The value of a is ' + this.a);
+    }
+  };
+
+  callOtherFunction(myObj.myMethod); // Strips context
+}
+
+foo(); // Uncaught ReferenceError: myObj is not defined
+```
+
+  * There are a couple of solutions to this situation:
+    1. You could add an extra parameter to `callOtherFunction`, which represents the desired context.
+
+**Example**
+
+```
+function callOtherFunction(func, context) {
+  func.call(context);
+}
+
+function foo() {
+  var myObj = {
+    a: 1,
+    myMethod: function() {
+      console.log('The value of a is ' + this.a);
+    }
+  };
+
+  callOtherFunction(myObj.myMethod, myObj); // Strips context
+}
+
+foo(); // 'The value of a is 1'
+```
+
+    2. You could hard bind the function to the object using `bind`.
+
+```
+function callOtherFunction(func) {
+  func();
+}
+
+function foo() {
+  var myObj = {
+    a: 1,
+    myMethod: function() {
+      console.log('The value of a is ' + this.a);
+    }
+  };
+
+  callOtherFunction(myObj.myMethod.bind(myObj)); // binds context
+}
+
+foo(); // 'The value of a is 1'
+```
+
 <a name="this"></a>
 ## The `this` Keyword in JavaScript
