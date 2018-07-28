@@ -316,5 +316,175 @@ function foo() {
 foo(); // 'The value of a is 1'
 ```
 
+### Internal functons losing method context
+
+  * Another situation where methods can lose context is when you have a function defined and then executed within a method call
+  * In this situation, the context of the outer method **does not propogate** to the internal function. The context of the function in this case is the global object.
+
+**Example**
+
+```
+var myObj = {
+  myMethod: function() {
+    function myFunc() {
+      console.log(this);
+    }
+
+    myFunc(); // the execution context here is the global object, not myObj
+  }
+};
+
+myObj.myMethod(); // [object Window]
+```
+
+  * There are a few solutions to this problem.
+
+    1. Preserve context with a local variable in the lexical scope
+      * You can store the value of `this` (i.e. the context object) top a variable named `self` or `that` before calling the function, and then reference that variable in the function
+
+**Example**
+
+```
+var myObj = {
+  myMethod: function() {
+    var self = this;
+    function myFunc() {
+      console.log(self);
+    }
+
+    myFunc(); // the execution context here is still the global object, not myObj, but we have passed myObj to as the variable self to be used in myFunc
+  }
+};
+
+myObj.myMethod(); // [object myObj]
+```
+
+    2. Explictly set the context when calling the function
+
+**Example**
+
+```
+var myObj = {
+  myMethod: function() {
+    function myFunc() {
+      console.log(this);
+    }
+
+    myFunc.call(this); // the execution context here is explicitly set to myObj using the this keyword
+  }
+};
+
+myObj.myMethod(); // [object myObj]
+```  
+
+    3. Hard bind the context using a function expression
+      * Note that to use `bind` you must use a function expression; a function declaration won't work.
+
+**Example**
+
+```
+var myObj = {
+  myMethod: function() {
+    var myFunc = function() {
+      console.log(this);
+    }.bind(this);
+
+    myFunc(); // the execution context has been hard bound to myObj, so however the function is executed, the context will always be myObj
+  }
+};
+
+myObj.myMethod(); // [object myObj]
+```
+
+  * One advantage of using `bind` is that you can bind the function once and then call it as many times as you want without worrying about providing a context
+
+### Function being used as an argument and so losing its surrounding context
+
+  * A function passed as an argument to antoher function is called without an explicit context, which means its context is the global object.
+
+**Example**
+
+```
+var myObj = {
+  myMethod: function() {
+    [1, 2, 3].forEach(function(number) {
+      console.log(String(number) + ': ' + this); // the context of the function passed to forEach is the global object
+    });
+  }  
+};
+
+myObj.myMethod();
+
+// 1: [object Window]
+// 2: [object Window]
+// 3: [object Window]
+```
+
+  * There are a few ways to deal with this issue
+
+    1. Use a local variable in the lexical scope to store this
+
+**Example**
+
+```
+var myObj = {
+  myMethod: function() {
+    var self = this;
+    [1, 2, 3].forEach(function(number) {
+      console.log(String(number) + ': ' + self);
+    }); // the context of the function passed to forEach is still the global object, but myObj can be referenced from within the function using the self variable
+  }  
+};
+
+myObj.myMethod();
+
+// 1: [object myObj]
+// 2: [object myObj]
+// 3: [object myObj]
+```
+
+    2. Hard bind the function passed in as an argument to the surrounding context
+
+**Example**
+
+```
+var myObj = {
+  myMethod: function() {
+    [1, 2, 3].forEach(function(number) {
+      console.log(String(number) + ': ' + this);
+      }.bind(this)); // the context of the function passed to forEach has been bound to myObj
+  }  
+};
+
+myObj.myMethod();
+
+// 1: [object myObj]
+// 2: [object myObj]
+// 3: [object myObj]
+```
+
+    3. Use the optional `thisArg` argument
+      * Some methods, such as `forEach` allow an optional arguments that defines the context to use when executing the function passed in
+
+**Example**
+
+```
+var myObj = {
+  myMethod: function() {
+    [1, 2, 3].forEach(function(number) {
+      console.log(String(number) + ': ' + this);
+    }, this); // the context of the function passed to forEach is set as MyObj by the thisArg argument
+  }  
+};
+
+myObj.myMethod();
+
+// 1: [object myObj]
+// 2: [object myObj]
+// 3: [object myObj]
+```
+
+
+
 <a name="this"></a>
 ## The `this` Keyword in JavaScript
