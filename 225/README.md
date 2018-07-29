@@ -25,10 +25,9 @@ Notes for [Launch School](https://launchschool.com/) Course 225
     * Higher Order Functions
     * Closures and Private Data
     * Objects and Closures
-    * Garbage Collection
     * How Closures Affect Garbage Collection
+    * Partial Function Application
     * Immediately Invoked Function Expressions (IIFEs)
-    * Creating Private Scope with and IIFE
 
   * [Object Creation Patterns](object_creation_patterns.md)
     * Factory Functions
