@@ -5,7 +5,7 @@
   * [Implicit and Explicit Function Execution Contexts](#implicit-explicit-contexts)
   * [Hard Binding Functions with Contexts](#hard-binding-contexts)
   * [Dealing with Context Loss](#context-loss)
-  * [The `this` Keyword in JavaScript](#this)
+  * [Summary of the `this` Keyword in JavaScript](#this)
 
 <a name="first-class-functions"></a>
 ## JavaScript and First-class Functions
@@ -484,7 +484,128 @@ myObj.myMethod();
 // 3: [object myObj]
 ```
 
-
-
 <a name="this"></a>
-## The `this` Keyword in JavaScript
+## Summary of the `this` Keyword in JavaScript
+
+  * As previously stated, `this` in JavaScript represents the execution context (i.e. the identity of the context object) at the point where a function is invoked
+  * The way a function is invoked therefore affects the execution context. JavaScript has four function invoked types:
+    * Function invocation
+    * Method invocation
+    * Constructor invocation
+    * Indirect invocation
+
+### Function Invocation
+
+  * With standard function invocation, `this` is the Global object. In a browser environment this is the Window object
+
+**Example**
+
+```
+function myFunc() {
+  console.log(this);
+}
+
+myFunc(); // [object Window]
+```
+
+### Method Invocation
+
+  * With method invocation, `this` is the calling object (i.e. the object to which the method belongs)
+
+**Example**
+
+```
+var myObj = {
+  myMethod: function() {
+    console.log(this);
+  }
+}
+
+myObj.myMethod(); // [object myObj]
+```
+
+  * If a method is extracted from an object and then invoked as a function, this is function invocation **not** method invocation. The execution context is therefore the gloabl object
+
+**Example**
+
+```
+var myObj = {
+  myMethod: function() {
+    console.log(this);
+  }
+}
+
+var myFunc = myObj.myMethod;
+myFunc(); // [object Window]
+```
+
+### Constructor Invocation
+
+  * Constructor invocation is performed when a function invocation is prepended by the `new` keyword.
+  * Executing a function in this way creates a new object that is returned by the function
+  * In this situation, the execution context of the function is the newly created object
+
+**Example**
+
+```
+function myFunc() {
+  console.log(this);
+}
+
+var myNewObj = new myFunc(); // [object myNewObj]
+```
+
+### Indirect Invocation/ Explicit Function Execution
+
+  * Indirect Invocation is calling a function with an inherited method of the `Function` object that allows you to explicitly set the execution context of the function being invoked.
+  * The methods of the `Function` object that allow you to do this are `call` and `apply`
+  * When `call` or `apply` are used, the execution context of teh function is the first argument passed to those methods
+
+**Example**
+
+```
+function myFunc() {
+  console.log(this);
+}
+
+var myObj = {};
+
+myFunc.call(myObj); // [object myObj]
+myFunc.apply(myObj); // [object myObj]
+```
+
+### Other Changes to Execution Context
+
+  * As well as being changed by the four function invocation types, the execution context of a function can be changed in other situations:
+    * Hard binding of a function
+    * use of Arrow Functions (ES6)
+
+#### Hard Binding
+
+  * A function can be bound to a particular object by use of the `bind` keyword.
+  * In this situation, however the function is subsequently invoked (except for constructor invocation), the execution context is always the object to which it was bound
+  * Note: you can't bind directly to a function declaration, only a function expression
+
+**Example**
+
+```
+function myFunc() {
+  console.log(this);
+}
+
+var myObj = {};
+
+var someFunc = myFunc.bind(myObj);
+someFunc(); // [object myObj]
+```
+
+#### Arrow Functions
+
+  * Arrow functions are a syntax for declaring functions in JavaScript ES6
+  * With arrow functions, the execution context is defined `lexically`. In other words, the context is is determined when the function is declared rather than at the point of execution.
+  * An arrow function is bound to its lexical context
+
+### Resources
+
+  * [Gentle explanation of 'this' keyword in JavaScript](https://web.archive.org/web/20180209163541/https://dmitripavlutin.com/gentle-explanation-of-this-in-javascript/)
+  * [JavaScript: The Keyword ‘This’ for Beginners](https://codeburst.io/javascript-the-keyword-this-for-beginners-fb5238d99f85)
