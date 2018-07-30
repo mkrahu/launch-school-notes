@@ -178,10 +178,117 @@ function myFunc() {
 var someVar = myFunc();
 ```
 
-  * In the above example, when `myFunc` is called it returns a function that has `a` and `b` in its closure, however it only ever accesses `a`. In theory, as long as `someVar` exists, both `a` and `b` should be kept around since they are in its closure, but in practice most JavaScript engines are clever enough to decide that `b` is not required since it can never be accessed, and so can be garbage collected.
+  * In the above example, when `myFunc` is called it returns a function that has `a` and `b` in its closure, however it only ever accesses `a`. In theory, as long as `someVar` exists, both `"some string"` and `"another string"` should be kept around since they referenced by variables in its closure, but in practice most JavaScript engines are clever enough to decide that `"another string"` is not required since it can never be accessed, and so can be garbage collected.
 
 <a name="partial-function-application"></a>
 ## Partial Function Application
 
+  * Partial Function Application is essentially creating functions that already have some of the arguments pre-set.
+  * It uses a function that returns a new function which calls a third function that the initial function receives as an argument
+  * This initial function also receives some of the third function's arguments. These arguments remain accessible to the third function because they are part of its closure
+
+**Example**
+
+```
+function add(num1, num2) {
+  return num1 + num2;
+}
+
+function creator(func, arg) {
+  return function(funcArg) {
+    return func(arg, funcArg);
+  }
+}
+
+var add2 = creator(add, 2);
+add2(3); // 5
+```
+
+  * In the example above, the call to `creator` returns a function that takes a single argument `funcArg`, and has `func` (in this case the function `add`) and `arg` (in this case the number `2`) in its closure.
+  * The returned function is assigned to the variable `add2`, which when called as a function, takes the argument `3` and executes the `add` function from its closure with the number assigned to `arg` as the first argument to `add` and the number passed in to `add2` as the second argument to `add`.
+
+### Partial Function Application and `bind`
+
+  * In the example above, you could say that this works because the initial function passed in and the pre-set argument are *bound* to the returned function vai its closure.
+  * It is actually possible to use `Function.prototype.bind` for Partial Function Application
+
+**Example**
+
+```
+function add(num1, num2) {
+  return num1 + num2;
+}
+
+var add2 = add.bind({}, 2); // the object that we bind to is irrelevant since we don't reference this
+add2(3); // 5
+```
+
+  * In the example above, we use `bind` to return a copy of the `add` function that is permantly bound to some arbitrary object and also to the argument `2`
+  * This returned function is assigned to the variable `add2` which, when called as a function, calls `add` but with the first argument `2` already bound to it
+
 <a name="iife"></a>
 ## Immediately Invoked Function Expressions (IIFEs)
+
+  * An IIFE is a function that we define and invoke simultaneously
+  * Adding parentheses around the function definition makes it explicit that we want to parse the function as an expression
+  * Adding parentheses at the end of the function expression immediately invokes it as a function
+
+**Example**
+
+```
+(function() {
+  console.log('hello');
+})(); // logs 'hello'
+```
+  * An alternative syntax has the parentheses for the argument list inside the outer set of parntheses
+
+**Example**
+
+```
+(function() {
+  console.log('hello');
+}()); // logs 'hello'
+```
+
+  * IIFEs can take arguments like any other function
+
+**Example**
+
+```
+(function(word) {
+  console.log(word);
+})('goodbye'); // logs 'goodbye'
+```
+
+  * The outer parentheses can be omitted when a function definition is an expression that doesn't occur at the beginning of a line
+
+**Example**
+
+```
+var foo = function() {
+  return 'hello';
+}();
+
+console.log(foo);
+```
+
+  * In the example above, since the function being assigned to `foo` is already part of a function expression we can omit the outer parentheses. Adding the argument parentheses list at the end of the function declaration immediately invokes the function and it is the return value that is assigned to `foo`, not the function itself.
+
+### Creating a Private Scope with an IIFE
+
+  * Since functions create a private scope, and since immediately invoking a function as an IIFE means we don't need to name it, IIFEs can be used to isolate some code from the rest of the code base.
+  * This can be useful if you need to run some code in a code base and you don't know if a particular name has already been used for a variable or function elsewhere in the codebase
+
+**Example**
+
+```
+// lots of unknown code
+
+(function() {
+  // function body
+})();
+
+// lots of unknown code
+```
+
+  * The IIFE pattern provides a way to create a 'module' of sorts.
