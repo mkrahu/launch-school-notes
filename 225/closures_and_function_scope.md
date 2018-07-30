@@ -154,7 +154,7 @@ myObj.myVar; // undefined (since myVar is not a property of MyObj, it is a varai
 ## How Closures Affect Garbage Collection
 
   * Garbage collection is a function of some programming languages that automatically frees up allocated memory once it is no longer required
-  * The way that garbage collection (GC) determines whether memory is no longer required has evolved and become more advanced over time. Most modern programming languages that implement garbage collection do so using a mark and sweep algorithm. THis algortihm determines if an object is still reachable in some way (e.g. it is referenced by a varibale still in use, or exists in a closure); if it is not then it is marked for collection.
+  * The way that garbage collection (GC) determines whether memory is no longer required has evolved and become more advanced over time. Most modern programming languages that implement garbage collection do so using a mark and sweep algorithm. This algortihm determines if an object is still reachable in some way (e.g. it is referenced by a variable still in use, or exists in a closure); if it is not then it is marked for collection.
   * See the [MDN docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management) for more information on how GC works in JavaScript.
 
 ### Closures and GC
@@ -162,6 +162,23 @@ myObj.myVar; // undefined (since myVar is not a property of MyObj, it is a varai
   * When you create a closure, it stores a reference to all the varaibles it can access at the point it was created
   * Theoretically, as long as the closure exists the primitives and objects assigned to the variables it references must be stored in memory (i.e. they cannot be garbage collected)
   * In practice, using closures can create situations where values should not be garbage collected but might be. See this [Stack Overflow post](https://stackoverflow.com/questions/24468713/javascript-closures-concerning-unreferenced-variables) for an example scenario.
+
+**Example**
+
+```
+function myFunc() {
+  var a = "some string";
+  var b = "another string"
+
+  return function() {
+    console.log(a);
+  };
+}
+
+var someVar = myFunc();
+```
+
+  * In the above example, when `myFunc` is called it returns a function that has `a` and `b` in its closure, however it only ever accesses `a`. In theory, as long as `someVar` exists, both `a` and `b` should be kept around since they are in its closure, but in practice most JavaScript engines are clever enough to decide that `b` is not required since it can never be accessed, and so can be garbage collected.
 
 <a name="partial-function-application"></a>
 ## Partial Function Application
