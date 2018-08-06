@@ -172,8 +172,7 @@ myObj.constructor === createObj; // true
 ### The `Object` object
 
   * JavaScript has a [built in object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) called `Object`.
-  * The `Object` object is unusual in that it is a constructor for other objects, and can also be called as a Function
-
+  * The `Object` object is a global object that is used as a constructor for other objects.
   * We can call `Object` using the `new` operator, just like we would do with a constructor function we'd defined ourselves. This creates an empty object.
 
 **Example**
@@ -181,29 +180,309 @@ myObj.constructor === createObj; // true
 ```
 var myObj = new Object();
 myObj; // {}
+myObj.constructor === Object; // true
 ```
 
-  * We can also simply call `Object()` as a function without the `new` operator. Unlike a constructor function we've defined ourselves, this returns an empty object rather than `undefined`
+  * We can also call `Object()` as a function without the `new` operator. Unlike a constructor function we've defined ourselves, this returns an empty object rather than `undefined`
 
 **Example**
 
 ```
 var myObj = Object();
 myObj; // {}
+myObj.constructor === Object; // true
 ```
 
-  *
+  * When we define an object literal, this is using the *initializer notation* of `Object` to create a new object
+  * An object initializer is an expression that describes the initialization of an Object (source: [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Description))
+  * This is functionally equivalent to using `Object` as a constructor or calling it as a function
 
-https://codeburst.io/various-ways-to-create-javascript-object-9563c6887a47
+**Example**
 
-### The `instanceof` operator
+```
+var myObj = {};
+myObj; // {}
+myObj.constructor === Object; // true
+```
+
+  * The advantage of using the literal or initializer notation is that you can quickly create objects with properties.
+
+**Example**
+
+```
+var myObj = {
+  a: 1,
+  b: 2,
+  total: function() {
+    return this.a + this.b;
+  }
+};
+```
+
+  * Another way of creating objects is to use the `create` method of `Object`.
+  * The `create` method takes a required argument, which must be another object or `null` (note: additionally the `create` method can take an optional argument, a properties object, which defines the newly created object's properties)
+
+**Example**
+
+```
+var myObj = Object.create({});
+myObj; // {}
+myObj.constructor === Object; // true
+```
+
+### The `__proto__` property
+
+  * Every JavaScript object has a `__proto__` property (pronounced 'dunder proto' for double-underscore proto)
+  * This property always points to another object, which acts as a prototype of the object
+  * When the `Object.create` method is used to create a new object, the value of the newly created object's `__proto__` property is set to the object passed in the required argument.
+  * This is different from the value of the `constructor` property. With `Object.create`, the value of `constructor` is always `Object`, but the value of `__proto__` is set to the object passed in.
+
+**Example**
+
+```
+var myObj = Object.create({});
+myObj; // {}
+myObj.constructor === Object; // true
+
+var myObj2 = Object.create(myObj);
+myObj2.constructor === Object; // true
+myObj2.__proto__ === Object; // false
+myObj2.__proto__ === myObj; // true
+```
+
+  * The `Object` object has a property called `prototype`.
+  * The `Object.prototype` property represents the `Object` prototype object (i.e. the prototype object of `Object`)
+  * When using literal syntax, or `Object` as a constructor or function, `__proto__` is set to this `Object.prototype` object
+
+**Example**
+
+```
+var myObj = {};
+myObj.__proto__ === Object.prototype; // true
+
+var myObj2 = new Object;
+myObj2.__proto__ === Object.prototype; // true
+
+var myObj3 = Object();
+myObj2.__proto__ === Object.prototype; // true
+```
+
+### Prototype Chain
+
+  * We can use `Object.create` to create objects that form a prototype chain
+
+**Example**
+
+```
+var myObj = {};
+var myObj2 = Object.create(myObj);
+var myObj3 = Object.create(myObj2);
+var myObj4 = Object.create(myObj3);
+
+myObj4.__proto__ === myObj3; // true
+myObj3.__proto__ === myObj2; // true
+myObj2.__proto__ === myObj; // true
+myObj.__proto__ === Object.prototype; // true
+```
+
+  * The `Object.prototype` object is at the end of the prototype chain for all JavaScript objects.
+
+#### Object.getPrototypeOf and isPrototypeOf
+
+  * The `__proto__` proeerty is a non-standard object property introduced in Firefox. In the JavaScript specification this property is defined as `[[Prototype]]`, which is not a property you can interact with directly.
+  * Although `__proto__` is standard in ES6 and supported in most modern browsers, for backwards compatibility reasons, it is best avoided in production code.
+  * There are two methods that can be used instead of relying on `__proto__`
+    * `Object.getPrototypeOf(obj)` can be used to get the prototype of the object passed in to the method
+    * `obj.isPrototypeOf(otherObj)` is a method of `Object.prototype` and can check if the calling object is on the *prototype chain* of the object passed in to the method
+
+**Example**
+
+```
+var myObj = {};
+var myObj2 = Object.create(myObj);
+var myObj3 = Object.create(myObj2);
+var myObj4 = Object.create(myObj3);
+
+Object.getPrototypeOf(myObj4) === myObj3; // true
+Object.getPrototypeOf(myObj4) === myObj2; // false myObj2 isn't the protype of myObj4
+myObj2.isPrototypeOf(myObj4); // true myObj2 is above myObj4 on its protype chain
+```
 
 <a name="prototypal-inheritance-behaviour-delegation"></a>
 ## Prototypal Inheritance and Behavior Delegation
 
+  * When we try to access a property or method on an object, JavaScript first searches in the object itself, then searches in every object in up the protype chain until the end of the chain is reached
+
+**Example**
+
+```
+var myObj = {
+  a: 1,
+  b: 2,
+  hello: function() {
+    console.log('hello');
+  }
+};
+
+var myObj2 = Object.create(myObj);
+var myObj3 = Object.create(myObj2);
+var myObj4 = Object.create(myObj3);
+myObj4.a; // 1
+myObj4.b; // 2
+myObj4.c; // undefined
+myObj4.hello(); // logs 'hello'
+```
+
+  * Because `Object.prototype` is *usually* (unless we create an object from `null`) the 'final' point in the chain, all objects inherit from `Object.prototype`
+
+**Example**
+
+```
+var myObj = {};
+Object.getPrototypeOf(myObj) == Object.prototype; // true
+var myObj2 = Object.create(myObj);
+Object.getPrototypeOf(myObj2) == myObj; // true
+Object.prototype.isPrototypeOf(myObj2); // true
+```
+
+  * Because all objects ultimately inherit from `Object.prototype`, all objects have access to its properties and methods
+
+**Example**
+
+```
+var myObj = {a: 1};
+var myObj2 = Object.create(myObj);
+myObj2.a; // 1
+myObj2.hasOwnProperty('a'); // false
+// hasOwnProperty is a method of Object.prototype and so accessible to myObj2
+// it returns false here since 'a' is a property of myObj not myObj2, even though it has access to it thorugh inheritance from myObj
+```
+
+  * If `null` is passed in as an argument to `Object.create` then the value of `__proto__` is set to `undefined`.
+
+**Example**
+
+```
+var myObj = Object.create(null);
+myObj.a = 1;
+var myObj2 = Object.create(myObj);
+myObj2.a; // 1
+myObj2.hasOwnProperty('a'); // TypeError: myObj2.hasOwnProperty is not a function
+// myObj2 has no access to the hasOwnProperty method since Object.prototype is not part of its prototype chain
+```
+
+### Execution context of inherited methods
+
+  * Like all functions (in ES5 at least) the execution context of an inherited method (i.e. `this`) determined by how the method is called, not where it is defined
+
+**Example**
+
+```
+var myObj = {
+  hello: function() {
+    return 'hello '  + this.name;
+  }
+};
+
+var karl = Object.create(myObj);
+karl.name = 'karl';
+var world = Object.create(myObj);
+world.name = 'world';
+
+karl.hello(); // 'hello karl' this here is the karl object
+world.hello(); // 'hello world' this here is the world object
+```
+
+### Prototypal Inheritance vs Behaviour Delegation
+
+  * JavaScript's protype chain lookup for properties allows us to store data and behaviours anywhere on an object's prototype chain and have that object access it.
+  * This is a powerful way to share data and behaviours, allowing us to cut down on duplication
+
+**Example**
+
+```
+var dog = {
+  speak: function() {
+    console.log(this.name + ' says woof!');
+  }
+};
+
+// we can use the dog object as a protype to share behaviours will multiple other objects
+
+var fido = Object.create(dog);
+fido.name = 'Fido';
+fido.speak(); // 'Fido says woof'
+
+var spot = Object.create(dog);
+spot.name = 'Spot';
+spot.speak(); // 'Spot says woof'
+```
+
+  * This pattern is sometimes referred to as JavaScript's **Prototypal Inheritance**, since it seems similar to the class-based inheritance models of languages such as Java, Ruby, Python, etc.
+  * However, JavaScript isn't 'class oriented'. Objects can be created from any other objects and become part of that object's protype chain
+  * From a run-time point of view, it copuld be said that objects at the bottom of the chain 'delegate' requests to upstream objects. This design pattern is therefore perhaps more accurately referred to as **Behaviour Delegation**.
+
+### Over-riding Default Behaviour
+
+  * Objects created from prototypes can over-ride shared behaviours by defining the same methods locally
+
+**Example**
+
+```
+var dog = {
+  speak: function() {
+    console.log(this.name + ' says woof!');
+  }
+};
+
+// we can use the dog object as a protype to share behaviours will multiple other objects
+
+var fido = Object.create(dog);
+fido.name = 'Fido';
+fido.speak(); // 'Fido says woof!'
+
+var spot = Object.create(dog);
+spot.name = 'Spot';
+spot.speak = function() {
+  console.log(this.name + ' says woof woof woof!');
+};
+spot.speak(); // 'Spot says woof woof woof!'
+```
+
+### Methods on Object.prototype
+
+  * Since `Object.prototype` is at the top of the prototype chain for all JavaScript objects, all of its methods can be called by any JavaScript object. For example:
+    * `Object.prototype.toString()`: returns a string representation of the object
+    * `Object.prototype.isPrototypeOf(obj)`: tests if the object is in another object's prototype chain
+    * `Object.prototype.hasOwnProperty(prop)`: tests whether the property is defined on the object itself
+
+### Object.getOwnPropertyNames
+
+  * Another way of checking if a property is defined on an object is to use the `getOwnPropertyNames` method of object.
+  * Calling this method and passing in an object as an arguments returns an array of the property names of the object passed in
+
+**Example**
+
+```
+var myObj = {a: 1};
+var myObj2 = Object.create(myObj);
+
+myObj.a; // 1
+myObj2.a; // 1
+
+Object.getOwnPropertyNames(myObj); // ['a']
+Object.getOwnPropertyNames(myObj2); // [] (empty array)
+```
+
 
 <a name="constructors-prototypes"></a>
 ## Constructors and Prototypes
+
+
+### The `instanceof` operator
+
+  * The `instanceof` operator performs a similar function to `isPrototypeOf`, but in relation to constructors-prototypes
+  * `instanceof` tests whether the `prototype` property of a *constructor* appears anywhere in the protype chain of an object
 
 
 <a name="prototype-chain"></a>
