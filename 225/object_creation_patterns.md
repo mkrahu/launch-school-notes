@@ -473,17 +473,17 @@ myObj2.a; // 1
 Object.getOwnPropertyNames(myObj); // ['a']
 Object.getOwnPropertyNames(myObj2); // [] (empty array)
 ```
-
-
 <a name="constructors-prototypes"></a>
 ## Constructors and Prototypes
 
+  * 
 
 ### The `instanceof` operator
 
   * The `instanceof` operator performs a similar function to `isPrototypeOf`, but in relation to constructors-prototypes
   * `instanceof` tests whether the `prototype` property of a *constructor* appears anywhere in the protype chain of an object
 
+https://css-tricks.com/understanding-javascript-constructors/
 
 <a name="prototype-chain"></a>
 ## Constructors, Prototypes, and the Prototype Chain
@@ -492,6 +492,8 @@ Object.getOwnPropertyNames(myObj2); // [] (empty array)
 <a name="pseudo-classical-oloo"></a>
 ## The Pseudo-classical Pattern and the OLOO Pattern
 
+
+https://stackoverflow.com/questions/29788181/kyle-simpsons-oloo-pattern-vs-prototype-design-pattern
 
 <a name="object-constructor-methods"></a>
 ## More Methods on the Object Constructor
