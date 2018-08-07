@@ -476,18 +476,260 @@ Object.getOwnPropertyNames(myObj2); // [] (empty array)
 <a name="constructors-prototypes"></a>
 ## Constructors and Prototypes
 
-  * 
+  * In JavaScript all **constructors** have a special property called `prototype`. This property points to an object that has a `constructor` property that points back to the constructor.
+  * For example, the `constructor` property of the `Object.prototype` object points to `Object`
 
-### The `instanceof` operator
+**Example**
 
-  * The `instanceof` operator performs a similar function to `isPrototypeOf`, but in relation to constructors-prototypes
-  * `instanceof` tests whether the `prototype` property of a *constructor* appears anywhere in the protype chain of an object
+```
+var objectPrototype = Object.prototype;
+objectPrototype.hasOwnProperty('constructor'); // true
+objectPrototype.constructor === Object; // true
+```
 
-https://css-tricks.com/understanding-javascript-constructors/
+  * This also holds true for custom constructors, such as functions that we define. In this case, when we define the function, an object is instantiated and assigned to the `prototype` property, and the `constructor` property of that object initialized with the function as its value
+
+**Example**
+
+```
+function MyConstructor() {};
+var funcPrototype = MyConstructor.prototype;
+funcPrototype.hasOwnProperty('constructor'); // true
+funcPrototype.constructor === MyConstructor; // true
+```
+
+  * The object referenced by a function's `prototype` property is only useful when the function is used as a constructor. In this case, all the objects that it constructs will have that prototype object set as the value of their `__proto__` property
+  * Since those objects now have that prototype object on their prototype chain, they have access to the `constructor` property of that prototype object, which points to the constructor (in this case the function)
+
+**Example**
+
+```
+function MyConstructor() {};
+var funcPrototype = MyConstructor.prototype;
+
+var myObj1 = new MyConstructor;
+var myObj2 = new MyConstructor;
+
+Object.getPrototypeOf(myObj1) === funcPrototype; // true
+Object.getPrototypeOf(myObj2) === funcPrototype; // true
+
+funcPrototype.constructor === MyConstructor; // true
+myObj1.constructor === MyConstructor; // true
+myObj2.constructor === MyConstructor; // true
+```
+
+  * The object to which the constructor's `prototype` property points is known as "the constructor function's prototype object."
+  * It's important to note that this is **not** the prototype object of the constructor itself (which is assigned to it's `__proto__` property), but the prototype object of all the objects that the constructor creates.
+
+**Example**
+
+```
+function MyConstructor() {};
+MyConstructor.__proto__ === MyConstructor.prototype; // false
+
+var myObj1 = new MyConstructor;
+Object.getPrototypeOf(myObj1) === MyConstructor.prototype; // true
+```
+
+### Adding properties to the `prototype` object
+
+  * Since the `prototype` object is just like any other JavaScript object, we can add properties to it
+
+**Example**
+
+```
+function MyConstructor() {};
+MyConstructor.prototype.a = 1;
+MyConstructor.prototype.a; // 1
+```
+
+  * We can use the `prototype` object in order to set up behaviour delegation for objects created by a constructor
+
+**Example**
+
+```
+function Dog() {};
+Dog.prototype.speak = function() {
+  console.log(this.name + ' says woof!');
+};
+
+var fido = new Dog;
+fido.name = 'Fido';
+
+var spot = new Dog;
+spot.name = 'Spot';
+
+fido.speak(); // 'Fido says woof!'
+spot.speak(); // 'Spot says woof!'
+```
+
+  * In the above example, all objects created by the `Dog ` constructor share the behaviours on the object assigned to the constructor's `prototype` property
+  * This approach of sharing behaviours is called the 'Prototype Pattern' of object creation
 
 <a name="prototype-chain"></a>
 ## Constructors, Prototypes, and the Prototype Chain
 
+  * Since the value of the `prototype` property is just an object, we can assign other custom objects to that property
+  * By doing this we can create a 'Prototype Chain' of various objects that share behaviours to create more specialised objects at the bottom of the chain and more general ones at the top
+
+### Using the object returned by a constructor
+
+  * Using this method we can simply assign the `prototype` property of an object to another object returned by a constructor
+
+**Example**
+
+```
+function Animal(type) {
+  this.type = type;
+}
+
+Animal.prototype.move = function() {
+  console.log(this.name + ' is moving.');
+};
+
+function Dog(name) {
+  this.name = name;
+}
+Dog.prototype = new Animal('land');
+
+Dog.prototype.speak = function() {
+  console.log(this.name + ' says woof!');
+};
+
+fido = new Dog('Fido');
+fido.move(); // 'Fido is moving.'
+fido.speak(); 'Fido says woof!'
+```
+
+  * In the above example, the `prototype` property of the `Dog` constructor is set to the object returned by the `Animal` constructor.
+  * The `fido` instance of `Dog` has access to the `speak` method created on the object assigned to the `prototype` property of `Dog` (i.e. the `Animal` instance object), but also to the `move` method created on the object assigned to the `prototype` property of `Animal`
+  * We can even add new methods to the object assigned to the prototype propert of `Animal`, and these will be accessible to our `fido` instance object of `Dog`.
+
+**Example**
+
+```
+Animal.prototype.sleep = function() {
+  console.log(this.name + ' is sleeping.');
+};
+
+fido.sleep(); // 'Fido is sleeping.'
+```
+
+  * Something to be aware of with this approach is that attributes of the object returned by the constructor are also accesible to any objects created by a constructor with that object as the value of its `prototype` property
+
+**Example**
+
+```
+fido.type; // 'land'
+```
+
+### Using the object created by `Object.create`
+
+  * When you call `Object.create` and pass in an object, a new object is created with the value of its `__proto__` property set to the object passed in
+  * Since we can pass in any object to `Object.create`, and the object assigned to `prototype` is just like any other JavaScript object, we can referece this object and pass it in.
+
+**Example**
+
+```
+function Animal(type) {
+  this.type = type;
+}
+
+Animal.prototype.move = function() {
+  console.log(this.name + ' is moving.');
+};
+
+function Dog(name) {
+  this.name = name;
+}
+Dog.prototype = Object.create(Animal.prototype);
+
+Dog.prototype.speak = function() {
+  console.log(this.name + ' says woof!');
+};
+
+fido = new Dog('Fido');
+fido.move(); // 'Fido is moving.'
+fido.speak(); 'Fido says woof!'
+```
+
+  * In the above example, the `prototype` property of the `Dog` constructor is set to the object returned by `Object.create`. The `__proto__` property of this object is set to the same object assigned to the `Animal` constructor's `prototype` property
+  * The `fido` instance of `Dog` has access to the `speak` method created on the object assigned to the `prototype` property of `Dog` (i.e. object returned by `Object.create`), but also to the `move` method created on the object assigned to the `prototype` property of `Animal` (which is the same object assigned to the `__proto__` property of the object returned by `Object.create`)
+  * As before, we can add new methods to the object assigned to the prototype propert of `Animal`, and these will be accessible to our `fido` instance object of `Dog`.
+
+**Example**
+
+```
+Animal.prototype.sleep = function() {
+  console.log(this.name + ' is sleeping.');
+};
+
+fido.sleep(); // 'Fido is sleeping.'
+```
+
+  * The above works because the object referenced by `Animal.prototype` is available to the `fido` object via its prototype chain
+
+**Example**
+
+```
+fido.__proto__.__proto__ === Animal.prototype; // true
+```
+
+  * The difference in using `Object.create` is that unlike using `Animal` as a constructor, the object returned isn't a *direct* instance of `Animal` and so doesn't have access to the attibutes set by the `Animal` constructor
+
+**Example**
+
+```
+fido.type; // undefined
+```
+
+### The `instanceof` operator
+
+  * The `instanceof` operator tests whether the `prototype` property of a *constructor* appears anywhere in the protype chain of an object
+
+**Example**
+
+```
+fido instanceof Dog; // true
+```
+
+  * Here, since the the object referenced by `Dog.prototype` is the same as the object referenced by `fido.__proto__`, `instanceof` returns `true`
+
+**Example**
+
+```
+fido instanceof Animal; // true
+```
+
+  * This is the same story, except with one extra 'link' added in the chain. Since the the object referenced by `Animal.prototype` is the same as the object referenced by the `__proto__` property of the object referenced by `fido.__proto__`, `instanceof` returns `true`. In other words `fido.__proto__.__proto__ === Animal.prototype`
+
+### Resetting the `constructor` property
+
+  * Since the approaches detailed above assign the `prototype` of a constructor to a new object, the value of the `constructor` property of that object will be the constructor that created that object, not the constructor we are setting the value of `prototype` for
+
+**Example**
+
+```
+function Animal() {}
+function Dog() {}
+
+fido = new Dog;
+fido.constructor; // Dog
+
+Dog.prototype = new Animal;
+
+rex = new Dog;
+rex.constructor; // Animal
+```
+
+  * To avoid this problem, after assigning an object to the `prototype` property of the constructor, we can reassign the value of the `constructor` property of that object to the constructor
+
+**Example**
+
+```
+Dog.prototype.constructor = Dog;
+rex.constructor; // Dog
+```
 
 <a name="pseudo-classical-oloo"></a>
 ## The Pseudo-classical Pattern and the OLOO Pattern
