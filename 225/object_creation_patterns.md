@@ -734,8 +734,79 @@ rex.constructor; // Dog
 <a name="pseudo-classical-oloo"></a>
 ## The Pseudo-classical Pattern and the OLOO Pattern
 
+  * All of these approaches to the use of constructors and prototypes can be combined to provide various 'object creation patterns'.
+  * There are a number of different object creation patterns that can be used to create JavaScript objects, but two of the most widely used and robust are the 'Pseudo-classical' pattern and the 'OLOO Pattern'
 
-https://stackoverflow.com/questions/29788181/kyle-simpsons-oloo-pattern-vs-prototype-design-pattern
+### The Pseudo-classical Pattern
+
+  * The Pseudo-classical pattern is so called because it mimics the class-based approach found in many other languages such as Ruby and Python
+  * JavaScript doesn't have classes, but a similar approach can be created by using this pattern which combines the use of constructors and prototypes
+  * Constructors are used to initialize object states with arguments that can be passed into the constructor function
+  * Behaviours are shared between like objects by adding them to the constructor's `prototype` object
+
+**Example**
+
+```
+function Pet(name, type) {
+  this.name = name;
+  this.type = type;
+}
+
+Pet.prototype.speak = function() {
+  console.log(this.name + ' is speaking!');
+};
+
+var rex = new Pet('Rex', 'dog');
+var goldie = new Pet('Goldie', 'fish');
+
+rex instanceof Pet; // true
+goldie instanceof Pet; // true
+
+rex.speak(); // 'Rex is speaking!'
+goldie.speak(); // 'Goldie is speaking!'
+```
+
+### The OLOO Pattern
+
+  * The OLOO Pattern refers to 'Objects Linking to Other Objects'
+  * As an object creation pattern it doesn't try and mimic the class-based inheritance patterns of other languages, but instead leverages the fact that in JavaScript we can use `Object.create` to make objects inherit directly from other objects.
+  * This pattern is based solely on the use of prototypes, and doesn't use constructors at all
+
+**Example**
+
+```
+var Pet = {
+  name: null,
+  type: null,
+
+  speak: function() {
+    console.log(this.name + ' is speaking!');
+  },
+
+  init: function(name, type) {
+    this.name = name;
+    this.type = type;
+    return this;
+  },
+};
+
+var rex = Object.create(Pet).init('Rex', 'dog');
+var goldie = Object.create(Pet).init('Goldie', 'fish');
+
+Pet.isPrototypeOf(rex); // true
+Pet.isPrototypeOf(goldie); // true
+
+rex.speak(); // 'Rex is speaking!'
+goldie.speak(); // 'Goldie is speaking!'
+```
+
+  * The example above uses an optional `init` method to initialize the properties of the new objects with the arguments passed in
+  * For more information on the OLOO pattern, check out [this Stack Overflow question](https://stackoverflow.com/questions/29788181/kyle-simpsons-oloo-pattern-vs-prototype-design-pattern)
+
+### Other Object Creation Patterns
+
+  * There are other patterns that can be used to create objects in JavaScript besides the pseudo-classical and OLOO patterns.
+  * [This article](https://john-dugan.com/object-oriented-javascript-pattern-comparison/) compares some of these patterns
 
 <a name="object-constructor-methods"></a>
 ## More Methods on the Object Constructor
