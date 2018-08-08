@@ -810,3 +810,59 @@ goldie.speak(); // 'Goldie is speaking!'
 
 <a name="object-constructor-methods"></a>
 ## More Methods on the Object Constructor
+
+  * There are a number available on `Object` which are useful either on their own or in combination with other methods. A few of them are outlined below.
+
+### `Object.create` + `Object.getPrototypeOf`
+
+  * These methods can be combined to create a prototype chain which mimics classical inheritance
+  * `Object.getPrototypeOf` simply returns object assigned to the `[[Prototype]]` property of the object passed into the method. This is the same object assigned to the `prototype` property of the constructor of that object.
+
+**Example**
+
+```
+Object.getPrototypeOf([]) === Array.prototype; // true
+```
+
+  * We can leverage this fact to pass in that object directly to `Object.create`. That object then gets assigned to the `[[Prototype]]` property of the newly created object. We can then set that new object as the `prototype` value of a constructor
+
+**Example**
+
+```
+function NewArray() {}
+NewArray.prototype = Object.create(Object.getPrototypeOf([]));
+```
+
+  * If we now create an object using our `NewArray` constructor, it now has the `Array.prototype` object on its prototype chain
+  * This means that it can access properties on that object
+
+**Example**
+
+```
+var newArrObj = new NewArray;
+newArrObj.__proto__ === NewArray.prototype; // true
+newArrObj.__proto__.__proto__ === Array.prototype; // true
+
+// newArrObj can access properties of Array.prototype
+newArrObj.length; // 0
+newArrObj.push('a'); // 1
+newArrObj.length; // 1
+```
+
+  * However, we can add properties to `NewArray.prototype` which are then available to `NewArray` objects but not `Array` objects
+
+**Example**
+
+```
+NewArray.prototype.first = function() {
+  return this[0];
+};
+
+newArrObj.first(); // 'a'
+oldArrObj = new Array;
+oldArrObj.first(); // TypeError: oldArrObj.first is not a function
+```
+
+### `Object.defineProperties`
+
+  * All properties in JavaScript have four attributes:
