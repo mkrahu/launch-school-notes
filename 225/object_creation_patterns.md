@@ -865,4 +865,58 @@ oldArrObj.first(); // TypeError: oldArrObj.first is not a function
 
 ### `Object.defineProperties`
 
-  * All properties in JavaScript have four attributes:
+  * All properties in JavaScript have four attributes, and these are set to default values:
+
+```
+[[Configurable]] // true
+[[Enumerable]] // true
+[[Writable]] // true
+[[Value]] // undefined
+```
+
+  * If you want to create an object where these attributes aren't set to the default, you can use the `defineProperties` method of `Object` to set the values of one or more of these attributes.
+
+**Example**
+
+```
+var eternalYouth = {};
+
+Object.defineProperties(eternalYouth, {
+  age: {
+    value: 18,
+    writable: false,
+  },
+});
+
+console.log(eternalYouth.age); //18
+eternalYouth.age = 30;
+console.log(eternalYouth.age); //18
+```
+
+  * [MDN documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties)
+
+### `Object.freeze`
+
+  * If you wanted to create an objec that could not have new properties added to it, and the existing properties could not be removed or their attributes changed, you could use the `Object.freeze` method.
+
+**Example**
+
+```
+var myObj = {
+  a: 1,
+  b: [1, 2, 3],
+}
+
+Object.freeze(myObj);
+myObj.a = 2;
+console.log(myObj.a); //1
+```
+
+  * `Object.freeze` only applies to the immediate properties of an object, in otherwords it is a *shallow freeze*. If a property is itself an object, that object is not frozen
+
+**Example**
+
+```
+myObj.b.push(4);
+console.log(myObj.b); // [1, 2, 3, 4]
+```
